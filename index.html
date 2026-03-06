@@ -9,6 +9,38 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* PHOTO FIX — inline to ensure it loads */
+    .hero-photo {
+      width: 90px !important;
+      height: 90px !important;
+      border-radius: 50% !important;
+      overflow: hidden !important;
+      margin-bottom: 28px !important;
+      border: 2px solid #0D9EA4 !important;
+      box-shadow: 0 0 24px rgba(13,158,164,0.25) !important;
+      background: rgba(13,158,164,0.12) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      position: relative !important;
+    }
+    .hero-photo img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      display: block !important;
+      border-radius: 50% !important;
+    }
+    .profile-initials {
+      display: none;
+      position: absolute;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #0D9EA4;
+    }
+  </style>
 </head>
 <body>
 
@@ -28,7 +60,6 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-right">
-      <!-- DARK/LIGHT TOGGLE -->
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
         <span class="theme-icon" id="themeIcon">🌙</span>
       </button>
@@ -60,10 +91,13 @@
     <div class="hero-content">
       <div class="hero-tag reveal">Available for work 🟢</div>
 
-      <!-- PROFILE PHOTO -->
-      <div class="hero-photo reveal">
-       <img src="assets/profile.png" alt="Shishank Goyal" id="profileImg"
-          onerror="this.style.display='none'; document.getElementById('profileInitials').style.display='flex'"/>
+      <!-- PROFILE PHOTO — FIXED -->
+      <div class="hero-photo reveal" id="photoContainer">
+        <img
+          src="assets/profile.png"
+          alt="Shishank Goyal"
+          id="profileImg"
+        />
         <div class="profile-initials" id="profileInitials">SG</div>
       </div>
 
@@ -72,7 +106,6 @@
         <span class="line">Goyal<span class="accent">.</span></span>
       </h1>
 
-      <!-- TYPING ANIMATION -->
       <p class="hero-typing reveal">
         I am a <span class="typing-text" id="typingText"></span><span class="typing-cursor">|</span>
       </p>
@@ -227,13 +260,13 @@
           <div class="project-top">
             <span class="project-num">01</span>
             <div class="project-links">
-              <a href="https://shashank10.vercel.app" target="_blank" title="Live">↗</a>
+              <a href="https://shashankteh.github.io/portfolio/" target="_blank" title="Live">↗</a>
             </div>
           </div>
           <h3>Portfolio Website</h3>
-          <p>Full-stack personal portfolio built with MERN Stack — dynamic project showcase, contact form, and fully responsive UI. Deployed live on Vercel.</p>
+          <p>Personal portfolio built with HTML, CSS & JavaScript — dynamic animations, contact form, and fully responsive UI. Deployed live on GitHub Pages.</p>
           <div class="project-tech">
-            <span>React.js</span><span>Node.js</span><span>MongoDB</span><span>Vercel</span>
+            <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>GitHub Pages</span>
           </div>
         </div>
         <div class="project-card reveal">
@@ -341,11 +374,9 @@
             <span class="divider">/</span>
             <a href="https://linkedin.com/in/shashankgoyal10" target="_blank" class="social-link">LinkedIn</a>
             <span class="divider">/</span>
-            <a href="https://shashank10.vercel.app" target="_blank" class="social-link">Portfolio</a>
+            <a href="https://shashankteh.github.io/portfolio/" target="_blank" class="social-link">Portfolio</a>
           </div>
         </div>
-
-        <!-- CONTACT FORM -->
         <div class="contact-right reveal">
           <form class="contact-form" id="contactForm">
             <div class="form-group">
@@ -385,5 +416,22 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    // PHOTO FIX — runs immediately after page loads
+    window.addEventListener('load', function() {
+      var img = document.getElementById('profileImg');
+      var initials = document.getElementById('profileInitials');
+      if (img) {
+        img.onerror = function() {
+          this.style.display = 'none';
+          initials.style.display = 'flex';
+        };
+        // Force reload if already broken
+        if (!img.complete || img.naturalWidth === 0) {
+          img.onerror();
+        }
+      }
+    });
+  </script>
 </body>
 </html>
