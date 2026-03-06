@@ -9,40 +9,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
-  <style>
-    /* PHOTO FIX — inline to ensure it loads */
-    .hero-photo {
-      width: 90px !important;
-      height: 90px !important;
-      border-radius: 50% !important;
-      overflow: hidden !important;
-      margin-bottom: 28px !important;
-      border: 2px solid #0D9EA4 !important;
-      box-shadow: 0 0 24px rgba(13,158,164,0.25) !important;
-      background: rgba(13,158,164,0.12) !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      position: relative !important;
-    }
-    .hero-photo img {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
-      display: block !important;
-      border-radius: 50% !important;
-    }
-    .profile-initials {
-      display: none;
-      position: absolute;
-      font-family: 'Syne', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #0D9EA4;
-    }
-  </style>
 </head>
 <body>
+
+  <!-- PARTICLES CANVAS -->
+  <canvas id="particlesCanvas" style="position:fixed;top:0;left:0;z-index:0;pointer-events:none;"></canvas>
 
   <!-- CURSOR -->
   <div class="cursor" id="cursor"></div>
@@ -56,7 +27,8 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#github">GitHub</a></li>
+      <li><a href="#certificates">Certs</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-right">
@@ -76,6 +48,7 @@
       <li><a href="#skills" class="mobile-link">Skills</a></li>
       <li><a href="#experience" class="mobile-link">Experience</a></li>
       <li><a href="#projects" class="mobile-link">Projects</a></li>
+      <li><a href="#github" class="mobile-link">GitHub</a></li>
       <li><a href="#certificates" class="mobile-link">Certificates</a></li>
       <li><a href="#contact" class="mobile-link">Contact</a></li>
     </ul>
@@ -91,13 +64,9 @@
     <div class="hero-content">
       <div class="hero-tag reveal">Available for work 🟢</div>
 
-      <!-- PROFILE PHOTO — FIXED -->
+      <!-- PROFILE PHOTO -->
       <div class="hero-photo reveal" id="photoContainer">
-        <img
-          src="assets/profile.png"
-          alt="Shishank Goyal"
-          id="profileImg"
-        />
+        <img src="assets/profile.png" alt="Shishank Goyal" id="profileImg"/>
         <div class="profile-initials" id="profileInitials">SG</div>
       </div>
 
@@ -112,11 +81,9 @@
 
       <p class="hero-location reveal">📍 Jaipur, India</p>
       <div class="hero-cta reveal">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="assets/Shishank_Goyal_Resume.pdf" class="btn btn-resume" download="Shishank_Goyal_Resume.pdf">
-          ⬇ Download Resume
-        </a>
-        <a href="#contact" class="btn btn-ghost">Hire Me</a>
+        <a href="#projects" class="btn btn-primary magnetic">View Projects</a>
+        <a href="assets/Shishank_Goyal_Resume.pdf" class="btn btn-resume magnetic" download>⬇ Download Resume</a>
+        <a href="#contact" class="btn btn-ghost magnetic">Hire Me</a>
       </div>
     </div>
     <div class="hero-scroll">
@@ -134,23 +101,19 @@
           <h2 class="section-title reveal">Crafting digital<br/><em>experiences</em> that matter.</h2>
         </div>
         <div class="about-right">
-          <p class="about-text reveal">
-            I'm a BCA graduate with <strong>1+ year of hands-on experience</strong> in full-stack development and enterprise Oracle HCM consulting. I build clean, performant web applications and have worked on real enterprise systems managing 1,200+ employee records.
-          </p>
-          <p class="about-text reveal">
-            When I'm not coding, I'm exploring cybersecurity, building IoT projects, and contributing to open-source. I believe good code is like good design — it should be invisible, effortless, and beautiful.
-          </p>
+          <p class="about-text reveal">I'm a BCA graduate with <strong>1+ year of hands-on experience</strong> in full-stack development and enterprise Oracle HCM consulting. I build clean, performant web applications and have worked on real enterprise systems managing 1,200+ employee records.</p>
+          <p class="about-text reveal">When I'm not coding, I'm exploring cybersecurity, building IoT projects, and contributing to open-source. I believe good code is like good design — invisible, effortless, and beautiful.</p>
           <div class="about-stats reveal">
             <div class="stat">
-              <span class="stat-num">1+</span>
+              <span class="stat-num" data-target="1" data-suffix="+">0</span>
               <span class="stat-label">Years Experience</span>
             </div>
             <div class="stat">
-              <span class="stat-num">6+</span>
+              <span class="stat-num" data-target="6" data-suffix="+">0</span>
               <span class="stat-label">Projects Built</span>
             </div>
             <div class="stat">
-              <span class="stat-num">1200+</span>
+              <span class="stat-num" data-target="1200" data-suffix="+">0</span>
               <span class="stat-label">Records Managed</span>
             </div>
           </div>
@@ -164,48 +127,67 @@
     <div class="container">
       <div class="section-label">02 / Skills</div>
       <h2 class="section-title reveal">What I <em>work with.</em></h2>
-      <div class="skills-grid reveal">
+
+      <!-- SKILL CARDS -->
+      <div class="skills-grid">
         <div class="skill-card">
           <div class="skill-icon">⚡</div>
           <h3>Frontend</h3>
-          <div class="skill-tags">
-            <span>React.js</span><span>JavaScript</span><span>HTML5</span><span>CSS3</span>
-          </div>
+          <div class="skill-tags"><span>React.js</span><span>JavaScript</span><span>HTML5</span><span>CSS3</span></div>
         </div>
         <div class="skill-card">
           <div class="skill-icon">🔧</div>
           <h3>Backend</h3>
-          <div class="skill-tags">
-            <span>Node.js</span><span>Express.js</span><span>Python</span><span>Java</span>
-          </div>
+          <div class="skill-tags"><span>Node.js</span><span>Express.js</span><span>Python</span><span>Java</span></div>
         </div>
         <div class="skill-card">
           <div class="skill-icon">🗄️</div>
           <h3>Database & Cloud</h3>
-          <div class="skill-tags">
-            <span>MongoDB</span><span>MySQL</span><span>SQL</span><span>Oracle Cloud</span>
-          </div>
+          <div class="skill-tags"><span>MongoDB</span><span>MySQL</span><span>SQL</span><span>Oracle Cloud</span></div>
         </div>
         <div class="skill-card">
           <div class="skill-icon">☁️</div>
           <h3>Oracle HCM</h3>
-          <div class="skill-tags">
-            <span>Fusion HCM</span><span>HCM Loader</span><span>BIP Reports</span><span>Fast Formulas</span>
-          </div>
+          <div class="skill-tags"><span>Fusion HCM</span><span>HCM Loader</span><span>BIP Reports</span><span>Fast Formulas</span></div>
         </div>
         <div class="skill-card">
           <div class="skill-icon">🔐</div>
           <h3>Cybersecurity</h3>
-          <div class="skill-tags">
-            <span>Network Analysis</span><span>IoT Security</span><span>Port Scanning</span><span>RFID</span>
-          </div>
+          <div class="skill-tags"><span>Network Analysis</span><span>IoT Security</span><span>Port Scanning</span><span>RFID</span></div>
         </div>
         <div class="skill-card">
           <div class="skill-icon">🛠️</div>
           <h3>Tools</h3>
-          <div class="skill-tags">
-            <span>Git/GitHub</span><span>Linux</span><span>Blender 3D</span><span>Adobe Suite</span>
-          </div>
+          <div class="skill-tags"><span>Git/GitHub</span><span>Linux</span><span>Blender 3D</span><span>Adobe Suite</span></div>
+        </div>
+      </div>
+
+      <!-- SKILL PROGRESS BARS -->
+      <div class="skills-progress reveal">
+        <h3 class="progress-title">Proficiency</h3>
+        <div class="progress-item">
+          <div class="progress-label"><span>MERN Stack</span><span>85%</span></div>
+          <div class="progress-bar"><div class="progress-fill" data-width="85"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>Oracle HCM</span><span>80%</span></div>
+          <div class="progress-bar"><div class="progress-fill" data-width="80"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>Python</span><span>75%</span></div>
+          <div class="progress-bar"><div class="progress-fill" data-width="75"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>Java</span><span>70%</span></div>
+          <div class="progress-bar"><div class="progress-fill" data-width="70"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>Cybersecurity / Networking</span><span>65%</span></div>
+          <div class="progress-bar"><div class="progress-fill" data-width="65"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>SQL / Databases</span><span>78%</span></div>
+          <div class="progress-bar"><div class="progress-fill" data-width="78"></div></div>
         </div>
       </div>
     </div>
@@ -256,48 +238,73 @@
       <div class="section-label">04 / Projects</div>
       <h2 class="section-title reveal">Things I've <em>built.</em></h2>
       <div class="projects-grid">
-        <div class="project-card reveal featured">
+        <div class="project-card featured">
           <div class="project-top">
             <span class="project-num">01</span>
-            <div class="project-links">
-              <a href="https://shashankteh.github.io/portfolio/" target="_blank" title="Live">↗</a>
-            </div>
+            <div class="project-links"><a href="https://shashankteh.github.io/portfolio/" target="_blank">↗</a></div>
           </div>
           <h3>Portfolio Website</h3>
-          <p>Personal portfolio built with HTML, CSS & JavaScript — dynamic animations, contact form, and fully responsive UI. Deployed live on GitHub Pages.</p>
-          <div class="project-tech">
-            <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>GitHub Pages</span>
-          </div>
+          <p>Personal portfolio with dark/light mode, particles, 3D tilt cards, Firebase backend, typing animations & GitHub stats. Deployed on GitHub Pages.</p>
+          <div class="project-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Firebase</span></div>
         </div>
-        <div class="project-card reveal">
+        <div class="project-card">
           <div class="project-top"><span class="project-num">02</span></div>
           <h3>Network Anomaly Detection Tool</h3>
           <p>Python-based cybersecurity tool for real-time network traffic analysis, anomaly detection, and automated port scanning.</p>
           <div class="project-tech"><span>Python</span><span>Networking</span><span>Cybersecurity</span></div>
         </div>
-        <div class="project-card reveal">
+        <div class="project-card">
           <div class="project-top"><span class="project-num">03</span></div>
           <h3>Smart Room with RFID</h3>
-          <p>IoT-powered smart room system with RFID-based access control, automated lighting, and centralized security event log using Arduino.</p>
+          <p>IoT-powered smart room with RFID-based access control, automated lighting, and centralized security event log.</p>
           <div class="project-tech"><span>Arduino</span><span>IoT</span><span>RFID</span><span>C++</span></div>
         </div>
-        <div class="project-card reveal">
+        <div class="project-card">
           <div class="project-top"><span class="project-num">04</span></div>
           <h3>ESP32 Marauder</h3>
-          <p>Configured ESP32-based wireless security auditing device for penetration testing in IoT environments.</p>
+          <p>ESP32-based wireless security auditing device for penetration testing in IoT environments and Wi-Fi scanning.</p>
           <div class="project-tech"><span>ESP32</span><span>IoT Security</span><span>Wi-Fi</span></div>
         </div>
-        <div class="project-card reveal">
+        <div class="project-card">
           <div class="project-top"><span class="project-num">05</span></div>
           <h3>E-Commerce Website</h3>
-          <p>Responsive front-end e-commerce platform with product listings, cart UI, and mobile-first design principles.</p>
+          <p>Responsive front-end e-commerce platform with product listings, cart UI, and mobile-first design.</p>
           <div class="project-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
         </div>
-        <div class="project-card reveal">
+        <div class="project-card">
           <div class="project-top"><span class="project-num">06</span></div>
           <h3>Recycling Awareness Website</h3>
-          <p>Sustainability-focused website promoting recycling with educational content and local recycling centre locators.</p>
+          <p>Sustainability-focused website promoting recycling with educational content and local centre locators.</p>
           <div class="project-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GITHUB STATS -->
+  <section class="github-section section" id="github">
+    <div class="container">
+      <div class="section-label">05 / GitHub</div>
+      <h2 class="section-title reveal">Open Source <em>Activity.</em></h2>
+      <div class="github-card reveal">
+        <div class="github-header">
+          <div class="github-avatar">
+            <img src="https://github.com/Shashankteh.png" alt="GitHub" onerror="this.src='assets/profile.png'"/>
+          </div>
+          <div class="github-info">
+            <h3>Shashankteh</h3>
+            <span>github.com/Shashankteh</span>
+          </div>
+          <a href="https://github.com/Shashankteh" target="_blank" class="btn btn-ghost magnetic">View Profile ↗</a>
+        </div>
+        <div class="github-stats-grid" id="githubStats">
+          <div class="github-stat-skeleton"></div>
+          <div class="github-stat-skeleton"></div>
+          <div class="github-stat-skeleton"></div>
+          <div class="github-stat-skeleton"></div>
+        </div>
+        <div class="github-img-wrap">
+          <img src="https://ghchart.rshah.org/0D9EA4/Shashankteh" alt="GitHub Contribution Chart" class="github-chart"/>
         </div>
       </div>
     </div>
@@ -306,47 +313,47 @@
   <!-- CERTIFICATES -->
   <section class="certificates section" id="certificates">
     <div class="container">
-      <div class="section-label">05 / Certificates</div>
+      <div class="section-label">06 / Certificates</div>
       <h2 class="section-title reveal">What I've <em>earned.</em></h2>
       <div class="cert-grid">
-        <div class="cert-card reveal">
+        <div class="cert-card">
           <div class="cert-icon">🎓</div>
           <div class="cert-info">
             <h3>HTML & CSS</h3>
             <span class="cert-issuer">Great Learning</span>
-            <span class="cert-badge">Verified</span>
+            <span class="cert-badge">Verified ✓</span>
           </div>
         </div>
-        <div class="cert-card reveal">
+        <div class="cert-card">
           <div class="cert-icon">🐍</div>
           <div class="cert-info">
             <h3>Python Programming</h3>
             <span class="cert-issuer">Great Learning</span>
-            <span class="cert-badge">Verified</span>
+            <span class="cert-badge">Verified ✓</span>
           </div>
         </div>
-        <div class="cert-card reveal">
+        <div class="cert-card">
           <div class="cert-icon">☕</div>
           <div class="cert-info">
             <h3>Java Programming</h3>
             <span class="cert-issuer">Great Learning</span>
-            <span class="cert-badge">Verified</span>
+            <span class="cert-badge">Verified ✓</span>
           </div>
         </div>
-        <div class="cert-card reveal">
+        <div class="cert-card">
           <div class="cert-icon">🌐</div>
           <div class="cert-info">
-            <h3>WordPress Website Development</h3>
+            <h3>WordPress Development</h3>
             <span class="cert-issuer">Coursera</span>
-            <span class="cert-badge">Verified</span>
+            <span class="cert-badge">Verified ✓</span>
           </div>
         </div>
-        <div class="cert-card reveal">
+        <div class="cert-card">
           <div class="cert-icon">📷</div>
           <div class="cert-info">
             <h3>Photography</h3>
             <span class="cert-issuer">Canon Certification</span>
-            <span class="cert-badge">Verified</span>
+            <span class="cert-badge">Verified ✓</span>
           </div>
         </div>
       </div>
@@ -356,18 +363,14 @@
   <!-- CONTACT -->
   <section class="contact section" id="contact">
     <div class="container">
-      <div class="section-label">06 / Contact</div>
+      <div class="section-label">07 / Contact</div>
       <div class="contact-grid">
         <div class="contact-left">
           <h2 class="section-title reveal">Let's work <em>together.</em></h2>
-          <p class="contact-sub reveal">I'm currently open to new opportunities. Whether you have a project, a job offer, or just want to say hi — my inbox is always open.</p>
+          <p class="contact-sub reveal">Open to new opportunities. Job offer, project, or just want to say hi — my inbox is always open.</p>
           <div class="contact-links reveal">
-            <a href="mailto:developershashank10@gmail.com" class="contact-btn">
-              <span>✉</span> developershashank10@gmail.com
-            </a>
-            <a href="tel:+918432474451" class="contact-btn">
-              <span>📞</span> +91 84324 74451
-            </a>
+            <a href="mailto:developershashank10@gmail.com" class="contact-btn">✉ developershashank10@gmail.com</a>
+            <a href="tel:+918432474451" class="contact-btn">📞 +91 84324 74451</a>
           </div>
           <div class="social-links reveal">
             <a href="https://github.com/Shashankteh" target="_blank" class="social-link">GitHub</a>
@@ -380,27 +383,24 @@
         <div class="contact-right reveal">
           <form class="contact-form" id="contactForm">
             <div class="form-group">
-              <label for="name">Your Name</label>
-              <input type="text" id="name" placeholder="John Doe" required />
+              <label>Your Name</label>
+              <input type="text" id="fname" placeholder="John Doe" required />
             </div>
             <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" placeholder="john@example.com" required />
+              <label>Email Address</label>
+              <input type="email" id="femail" placeholder="john@example.com" required />
             </div>
             <div class="form-group">
-              <label for="subject">Subject</label>
-              <input type="text" id="subject" placeholder="Job Opportunity / Project" required />
+              <label>Subject</label>
+              <input type="text" id="fsubject" placeholder="Job Opportunity / Project" required />
             </div>
             <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" rows="5" placeholder="Tell me about your project or opportunity..." required></textarea>
+              <label>Message</label>
+              <textarea id="fmessage" rows="5" placeholder="Tell me about your project..." required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
-              Send Message ✉
-            </button>
-            <div class="form-success" id="formSuccess">
-              ✅ Message sent! I'll get back to you soon.
-            </div>
+            <button type="submit" class="btn btn-primary btn-full magnetic" id="submitBtn">Send Message ✉</button>
+            <div class="form-success" id="formSuccess">✅ Message saved! I'll get back to you soon.</div>
+            <div class="form-error" id="formError">❌ Something went wrong. Please try again.</div>
           </form>
         </div>
       </div>
@@ -415,21 +415,17 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <!-- FIREBASE SDK -->
+  <script type="module" src="js/main.js"></script>
+
+  <!-- PHOTO FIX -->
   <script>
-    // PHOTO FIX — runs immediately after page loads
     window.addEventListener('load', function() {
       var img = document.getElementById('profileImg');
       var initials = document.getElementById('profileInitials');
       if (img) {
-        img.onerror = function() {
-          this.style.display = 'none';
-          initials.style.display = 'flex';
-        };
-        // Force reload if already broken
-        if (!img.complete || img.naturalWidth === 0) {
-          img.onerror();
-        }
+        img.onerror = function() { this.style.display='none'; initials.style.display='flex'; };
+        if (!img.complete || img.naturalWidth === 0) img.onerror();
       }
     });
   </script>
