@@ -6,12 +6,12 @@ import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.g
 
 // PASTE YOUR FIREBASE CONFIG HERE (see FIREBASE_SETUP.md)
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBa3yaHGHCNqMPsPd1h1ZhSP_kmzcAF6t8",
+  authDomain: "shishank-portfolio.firebaseapp.com",
+  projectId: "shishank-portfolio",
+  storageBucket: "shishank-portfolio.firebasestorage.app",
+  messagingSenderId: "388813101989",
+  appId: "1:388813101989:web:d4afa02c96ed29bcc5e64c"
 };
 let db = null;
 try { const app = initializeApp(firebaseConfig); db = getFirestore(app); } catch(e) {}
