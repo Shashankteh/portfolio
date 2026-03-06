@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -24,11 +24,18 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#certificates">Certificates</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="nav-menu" id="navMenu" aria-label="menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-right">
+      <!-- DARK/LIGHT TOGGLE -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon" id="themeIcon">🌙</span>
+      </button>
+      <button class="nav-menu" id="navMenu" aria-label="menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
   <!-- MOBILE MENU -->
@@ -38,6 +45,7 @@
       <li><a href="#skills" class="mobile-link">Skills</a></li>
       <li><a href="#experience" class="mobile-link">Experience</a></li>
       <li><a href="#projects" class="mobile-link">Projects</a></li>
+      <li><a href="#certificates" class="mobile-link">Certificates</a></li>
       <li><a href="#contact" class="mobile-link">Contact</a></li>
     </ul>
   </div>
@@ -51,16 +59,30 @@
     </div>
     <div class="hero-content">
       <div class="hero-tag reveal">Available for work 🟢</div>
+
+      <!-- PROFILE PHOTO -->
+      <div class="hero-photo reveal">
+        <img src="assets/profile.jpg" alt="Shishank Goyal" id="profileImg"
+          onerror="this.style.display='none'; document.getElementById('profileInitials').style.display='flex'"/>
+        <div class="profile-initials" id="profileInitials">SG</div>
+      </div>
+
       <h1 class="hero-name reveal">
         <span class="line">Shishank</span>
         <span class="line">Goyal<span class="accent">.</span></span>
       </h1>
-      <p class="hero-sub reveal">
-        Full Stack Developer &nbsp;/&nbsp; Oracle HCM Consultant &nbsp;/&nbsp; Cybersecurity Enthusiast
+
+      <!-- TYPING ANIMATION -->
+      <p class="hero-typing reveal">
+        I am a <span class="typing-text" id="typingText"></span><span class="typing-cursor">|</span>
       </p>
+
       <p class="hero-location reveal">📍 Jaipur, India</p>
       <div class="hero-cta reveal">
         <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="assets/Shishank_Goyal_Resume.pdf" class="btn btn-resume" download="Shishank_Goyal_Resume.pdf">
+          ⬇ Download Resume
+        </a>
         <a href="#contact" class="btn btn-ghost">Hire Me</a>
       </div>
     </div>
@@ -80,7 +102,7 @@
         </div>
         <div class="about-right">
           <p class="about-text reveal">
-            I'm a BCA graduate with <strong>1+ year of hands-on experience</strong> in full-stack development and enterprise Oracle HCM consulting. I build clean, performant web applications and have worked on real enterprise systems with 1,200+ employee records.
+            I'm a BCA graduate with <strong>1+ year of hands-on experience</strong> in full-stack development and enterprise Oracle HCM consulting. I build clean, performant web applications and have worked on real enterprise systems managing 1,200+ employee records.
           </p>
           <p class="about-text reveal">
             When I'm not coding, I'm exploring cybersecurity, building IoT projects, and contributing to open-source. I believe good code is like good design — it should be invisible, effortless, and beautiful.
@@ -96,7 +118,7 @@
             </div>
             <div class="stat">
               <span class="stat-num">1200+</span>
-              <span class="stat-label">Employee Records Managed</span>
+              <span class="stat-label">Records Managed</span>
             </div>
           </div>
         </div>
@@ -162,7 +184,6 @@
       <div class="section-label">03 / Experience</div>
       <h2 class="section-title reveal">Where I've <em>worked.</em></h2>
       <div class="timeline">
-
         <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-date">May 2025 — Dec 2025</div>
@@ -177,7 +198,6 @@
             </ul>
           </div>
         </div>
-
         <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-date">Oct 2024 — Apr 2025</div>
@@ -193,7 +213,6 @@
             </ul>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -204,7 +223,6 @@
       <div class="section-label">04 / Projects</div>
       <h2 class="section-title reveal">Things I've <em>built.</em></h2>
       <div class="projects-grid">
-
         <div class="project-card reveal featured">
           <div class="project-top">
             <span class="project-num">01</span>
@@ -213,67 +231,91 @@
             </div>
           </div>
           <h3>Portfolio Website</h3>
-          <p>Full-stack personal portfolio built with MERN Stack — featuring dynamic project showcase, contact form, and fully responsive UI. Deployed live on Vercel.</p>
+          <p>Full-stack personal portfolio built with MERN Stack — dynamic project showcase, contact form, and fully responsive UI. Deployed live on Vercel.</p>
           <div class="project-tech">
             <span>React.js</span><span>Node.js</span><span>MongoDB</span><span>Vercel</span>
           </div>
         </div>
-
         <div class="project-card reveal">
-          <div class="project-top">
-            <span class="project-num">02</span>
-          </div>
+          <div class="project-top"><span class="project-num">02</span></div>
           <h3>Network Anomaly Detection Tool</h3>
-          <p>Python-based cybersecurity tool for real-time network traffic analysis, anomaly detection, and automated port scanning to identify vulnerabilities.</p>
-          <div class="project-tech">
-            <span>Python</span><span>Networking</span><span>Cybersecurity</span>
-          </div>
+          <p>Python-based cybersecurity tool for real-time network traffic analysis, anomaly detection, and automated port scanning.</p>
+          <div class="project-tech"><span>Python</span><span>Networking</span><span>Cybersecurity</span></div>
         </div>
-
         <div class="project-card reveal">
-          <div class="project-top">
-            <span class="project-num">03</span>
-          </div>
+          <div class="project-top"><span class="project-num">03</span></div>
           <h3>Smart Room with RFID</h3>
-          <p>IoT-powered smart room system with RFID-based access control, automated lighting, and a centralized security event log using Arduino.</p>
-          <div class="project-tech">
-            <span>Arduino</span><span>IoT</span><span>RFID</span><span>C++</span>
-          </div>
+          <p>IoT-powered smart room system with RFID-based access control, automated lighting, and centralized security event log using Arduino.</p>
+          <div class="project-tech"><span>Arduino</span><span>IoT</span><span>RFID</span><span>C++</span></div>
         </div>
-
         <div class="project-card reveal">
-          <div class="project-top">
-            <span class="project-num">04</span>
-          </div>
+          <div class="project-top"><span class="project-num">04</span></div>
           <h3>ESP32 Marauder</h3>
-          <p>Configured ESP32-based wireless security auditing device for penetration testing in IoT environments. Used for Wi-Fi network scanning and vulnerability probing.</p>
-          <div class="project-tech">
-            <span>ESP32</span><span>IoT Security</span><span>Wi-Fi</span>
-          </div>
+          <p>Configured ESP32-based wireless security auditing device for penetration testing in IoT environments.</p>
+          <div class="project-tech"><span>ESP32</span><span>IoT Security</span><span>Wi-Fi</span></div>
         </div>
-
         <div class="project-card reveal">
-          <div class="project-top">
-            <span class="project-num">05</span>
-          </div>
+          <div class="project-top"><span class="project-num">05</span></div>
           <h3>E-Commerce Website</h3>
-          <p>Responsive front-end e-commerce platform with product listings, cart UI, and mobile-first design principles using HTML5, CSS3, and JavaScript.</p>
-          <div class="project-tech">
-            <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
-          </div>
+          <p>Responsive front-end e-commerce platform with product listings, cart UI, and mobile-first design principles.</p>
+          <div class="project-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
         </div>
-
         <div class="project-card reveal">
-          <div class="project-top">
-            <span class="project-num">06</span>
-          </div>
+          <div class="project-top"><span class="project-num">06</span></div>
           <h3>Recycling Awareness Website</h3>
-          <p>Sustainability-focused website promoting recycling with educational content, local recycling centre locators, and a clean user-friendly interface.</p>
-          <div class="project-tech">
-            <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
+          <p>Sustainability-focused website promoting recycling with educational content and local recycling centre locators.</p>
+          <div class="project-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section class="certificates section" id="certificates">
+    <div class="container">
+      <div class="section-label">05 / Certificates</div>
+      <h2 class="section-title reveal">What I've <em>earned.</em></h2>
+      <div class="cert-grid">
+        <div class="cert-card reveal">
+          <div class="cert-icon">🎓</div>
+          <div class="cert-info">
+            <h3>HTML & CSS</h3>
+            <span class="cert-issuer">Great Learning</span>
+            <span class="cert-badge">Verified</span>
           </div>
         </div>
-
+        <div class="cert-card reveal">
+          <div class="cert-icon">🐍</div>
+          <div class="cert-info">
+            <h3>Python Programming</h3>
+            <span class="cert-issuer">Great Learning</span>
+            <span class="cert-badge">Verified</span>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-icon">☕</div>
+          <div class="cert-info">
+            <h3>Java Programming</h3>
+            <span class="cert-issuer">Great Learning</span>
+            <span class="cert-badge">Verified</span>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-icon">🌐</div>
+          <div class="cert-info">
+            <h3>WordPress Website Development</h3>
+            <span class="cert-issuer">Coursera</span>
+            <span class="cert-badge">Verified</span>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-icon">📷</div>
+          <div class="cert-info">
+            <h3>Photography</h3>
+            <span class="cert-issuer">Canon Certification</span>
+            <span class="cert-badge">Verified</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -281,24 +323,54 @@
   <!-- CONTACT -->
   <section class="contact section" id="contact">
     <div class="container">
-      <div class="section-label">05 / Contact</div>
-      <div class="contact-inner">
-        <h2 class="section-title reveal">Let's work <em>together.</em></h2>
-        <p class="contact-sub reveal">I'm currently open to new opportunities. Whether you have a project, a job offer, or just want to say hi — my inbox is always open.</p>
-        <div class="contact-links reveal">
-          <a href="mailto:developershashank10@gmail.com" class="contact-btn">
-            <span>✉</span> developershashank10@gmail.com
-          </a>
-          <a href="tel:+918432474451" class="contact-btn">
-            <span>📞</span> +91 84324 74451
-          </a>
+      <div class="section-label">06 / Contact</div>
+      <div class="contact-grid">
+        <div class="contact-left">
+          <h2 class="section-title reveal">Let's work <em>together.</em></h2>
+          <p class="contact-sub reveal">I'm currently open to new opportunities. Whether you have a project, a job offer, or just want to say hi — my inbox is always open.</p>
+          <div class="contact-links reveal">
+            <a href="mailto:developershashank10@gmail.com" class="contact-btn">
+              <span>✉</span> developershashank10@gmail.com
+            </a>
+            <a href="tel:+918432474451" class="contact-btn">
+              <span>📞</span> +91 84324 74451
+            </a>
+          </div>
+          <div class="social-links reveal">
+            <a href="https://github.com/Shashankteh" target="_blank" class="social-link">GitHub</a>
+            <span class="divider">/</span>
+            <a href="https://linkedin.com/in/shashankgoyal10" target="_blank" class="social-link">LinkedIn</a>
+            <span class="divider">/</span>
+            <a href="https://shashank10.vercel.app" target="_blank" class="social-link">Portfolio</a>
+          </div>
         </div>
-        <div class="social-links reveal">
-          <a href="https://github.com/Shashankteh" target="_blank" class="social-link">GitHub</a>
-          <span class="divider">/</span>
-          <a href="https://linkedin.com/in/shashankgoyal10" target="_blank" class="social-link">LinkedIn</a>
-          <span class="divider">/</span>
-          <a href="https://shashank10.vercel.app" target="_blank" class="social-link">Portfolio</a>
+
+        <!-- CONTACT FORM -->
+        <div class="contact-right reveal">
+          <form class="contact-form" id="contactForm">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" placeholder="John Doe" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="john@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" placeholder="Job Opportunity / Project" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" rows="5" placeholder="Tell me about your project or opportunity..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+              Send Message ✉
+            </button>
+            <div class="form-success" id="formSuccess">
+              ✅ Message sent! I'll get back to you soon.
+            </div>
+          </form>
         </div>
       </div>
     </div>
