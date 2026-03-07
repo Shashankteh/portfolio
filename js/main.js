@@ -1,12 +1,11 @@
-// ==========================================
-//  SHISHANK GOYAL v4 — EPIC 3D
-//  Three.js + GSAP + Flip + Firebase
-// ==========================================
+// ══════════════════════════════════════════
+//  SHISHANK GOYAL v5 — AURORA REDESIGN
+//  Violet + Rose + Amber Theme
+// ══════════════════════════════════════════
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
-// 🔥 PASTE YOUR FIREBASE CONFIG HERE
 const firebaseConfig = {
   apiKey: "AIzaSyBa3yaHGHCNqMPsPd1h1ZhSP_kmzcAF6t8",
   authDomain: "shishank-portfolio.firebaseapp.com",
@@ -18,80 +17,67 @@ const firebaseConfig = {
 let db = null;
 try { const app = initializeApp(firebaseConfig); db = getFirestore(app); } catch(e) {}
 
-// ── THREE.JS 3D FLOATING CRYSTALS ─────────
-function initThreeJS() {
-  const canvas = document.getElementById('threeCanvas');
+// ── THREE.JS FLOATING PARTICLES ────────────
+function initThree() {
+  const canvas = document.getElementById('bgCanvas');
+  if (!canvas) return;
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = 5;
+  const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 6;
 
-  // TEAL color
-  const tealColor = 0x0DBAAF;
-  const tealColorDim = 0x064440;
-
-  // Floating geometric shapes
-  const geometries = [
-    new THREE.OctahedronGeometry(0.3, 0),
-    new THREE.TetrahedronGeometry(0.25, 0),
-    new THREE.OctahedronGeometry(0.18, 0),
-    new THREE.TetrahedronGeometry(0.35, 0),
-    new THREE.OctahedronGeometry(0.22, 0),
-    new THREE.TetrahedronGeometry(0.15, 0),
-    new THREE.OctahedronGeometry(0.28, 0),
-    new THREE.TetrahedronGeometry(0.2, 0),
-    new THREE.OctahedronGeometry(0.12, 0),
-    new THREE.TetrahedronGeometry(0.32, 0),
-    new THREE.OctahedronGeometry(0.16, 0),
-    new THREE.TetrahedronGeometry(0.24, 0),
-  ];
-
+  // Floating shapes — violet/rose/amber palette
+  const colors = [0x7C3AED, 0xF43F5E, 0xF59E0B, 0xa855f7, 0xe11d48];
   const meshes = [];
-  geometries.forEach((geo, i) => {
-    const mat = new THREE.MeshBasicGeometry ? null : null;
-    const material = new THREE.MeshPhongMaterial({
-      color: i % 3 === 0 ? tealColor : (i % 3 === 1 ? tealColorDim : 0x0a5550),
+
+  for (let i = 0; i < 14; i++) {
+    const size = Math.random() * 0.22 + 0.08;
+    const geo = i % 3 === 0
+      ? new THREE.OctahedronGeometry(size, 0)
+      : i % 3 === 1
+        ? new THREE.TetrahedronGeometry(size, 0)
+        : new THREE.BoxGeometry(size, size, size);
+
+    const mat = new THREE.MeshPhongMaterial({
+      color: colors[i % colors.length],
       wireframe: i % 2 === 0,
       transparent: true,
-      opacity: 0.15 + Math.random() * 0.25,
-      shininess: 100,
+      opacity: .08 + Math.random() * .15,
+      shininess: 80
     });
-    const mesh = new THREE.Mesh(geo, material);
+
+    const mesh = new THREE.Mesh(geo, mat);
     mesh.position.set(
-      (Math.random() - 0.5) * 12,
-      (Math.random() - 0.5) * 8,
-      (Math.random() - 0.5) * 4
+      (Math.random() - .5) * 14,
+      (Math.random() - .5) * 10,
+      (Math.random() - .5) * 5
     );
     mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
     mesh.userData = {
-      speedX: (Math.random() - 0.5) * 0.008,
-      speedY: (Math.random() - 0.5) * 0.008,
-      speedZ: (Math.random() - 0.5) * 0.004,
-      floatSpeed: Math.random() * 0.002 + 0.001,
-      floatOffset: Math.random() * Math.PI * 2,
+      rx: (Math.random() - .5) * .007,
+      ry: (Math.random() - .5) * .007,
+      fy: Math.random() * .002 + .001,
+      fo: Math.random() * Math.PI * 2
     };
     scene.add(mesh);
     meshes.push(mesh);
-  });
+  }
 
-  // Lighting
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
-  scene.add(ambientLight);
-  const pointLight = new THREE.PointLight(0x0DBAAF, 1.5, 20);
-  pointLight.position.set(3, 3, 3);
-  scene.add(pointLight);
-  const pointLight2 = new THREE.PointLight(0x064440, 1, 15);
-  pointLight2.position.set(-3, -2, 2);
-  scene.add(pointLight2);
+  scene.add(new THREE.AmbientLight(0xffffff, .2));
+  const pl = new THREE.PointLight(0x7C3AED, 2, 20);
+  pl.position.set(4, 4, 4);
+  scene.add(pl);
+  const pl2 = new THREE.PointLight(0xF43F5E, 1.5, 15);
+  pl2.position.set(-4, -3, 3);
+  scene.add(pl2);
 
-  // Mouse parallax
-  let mouseX = 0, mouseY = 0;
-  document.addEventListener('mousemove', (e) => {
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 0.5;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * 0.5;
+  let mx = 0, my = 0;
+  document.addEventListener('mousemove', e => {
+    mx = (e.clientX / window.innerWidth - .5) * .6;
+    my = (e.clientY / window.innerHeight - .5) * .6;
   });
 
   window.addEventListener('resize', () => {
@@ -101,262 +87,209 @@ function initThreeJS() {
   });
 
   const clock = new THREE.Clock();
-  function animate() {
-    requestAnimationFrame(animate);
-    const elapsed = clock.getElapsedTime();
-
-    meshes.forEach(mesh => {
-      mesh.rotation.x += mesh.userData.speedX;
-      mesh.rotation.y += mesh.userData.speedY;
-      mesh.rotation.z += mesh.userData.speedZ;
-      // Floating effect
-      mesh.position.y += Math.sin(elapsed * mesh.userData.floatSpeed * 60 + mesh.userData.floatOffset) * 0.0008;
+  (function tick() {
+    requestAnimationFrame(tick);
+    const t = clock.getElapsedTime();
+    meshes.forEach(m => {
+      m.rotation.x += m.userData.rx;
+      m.rotation.y += m.userData.ry;
+      m.position.y += Math.sin(t * m.userData.fy * 60 + m.userData.fo) * .0006;
     });
-
-    // Camera subtle parallax
-    camera.position.x += (mouseX - camera.position.x) * 0.03;
-    camera.position.y += (-mouseY - camera.position.y) * 0.03;
-
+    camera.position.x += (mx - camera.position.x) * .025;
+    camera.position.y += (-my - camera.position.y) * .025;
     renderer.render(scene, camera);
-  }
-  animate();
+  })();
 }
-initThreeJS();
+initThree();
 
-// ── GSAP SETUP ────────────────────────────
-gsap.registerPlugin(ScrollTrigger);
-
-// ── GSAP HERO ENTRANCE ────────────────────
-window.addEventListener('load', () => {
-  const tl = gsap.timeline({ delay: 0.2 });
-
-  // Photo rings entrance
-  tl.from('.spline-container', { scale: 0, opacity: 0, duration: 1, ease: 'back.out(1.5)' }, 0);
-  tl.from('.floating-3d-ring', { scale: 0, opacity: 0, duration: 1.2, stagger: 0.15, ease: 'back.out(1.2)' }, 0.2);
-
-  // Hero tag
-  tl.from('.hero-tag', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' }, 0.1);
-
-  // Split text — letters animate in
-  const heroLines = document.querySelectorAll('.split-line');
-  heroLines.forEach((line, i) => {
-    const text = line.dataset.text || line.textContent;
-    // Create letter spans
-    const letters = text.split('').map(char => {
-      const span = document.createElement('span');
-      span.style.display = 'inline-block';
-      span.style.overflow = 'hidden';
-      if(char === ' ') span.innerHTML = '&nbsp;';
-      else span.textContent = char;
-      if(line.querySelector('.accent') && i === 1) {
-        if(text.indexOf('.') !== -1 && char === '.') {
-          span.style.color = 'var(--teal)';
-        }
-      }
-      return span;
-    });
-
-    // Clear and rebuild (keep accent)
-    if(i === 1) {
-      line.innerHTML = '';
-      letters.forEach(s => line.appendChild(s));
-      // Re-add accent color to last char
-      const lastSpan = line.lastElementChild;
-      if(lastSpan) lastSpan.style.color = 'var(--teal)';
-    } else {
-      line.innerHTML = '';
-      letters.forEach(s => line.appendChild(s));
-    }
-
-    tl.from(line.querySelectorAll('span'), {
-      y: '110%', opacity: 0, duration: 0.7,
-      stagger: 0.03, ease: 'power4.out'
-    }, 0.3 + i * 0.1);
+// ── CURSOR ─────────────────────────────────
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+if (dot && ring) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
   });
-
-  // Typing, location, cta
-  tl.from('.hero-typing', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' }, 0.7);
-  tl.from('.hero-location', { y: 20, opacity: 0, duration: 0.6, ease: 'power3.out' }, 0.85);
-  tl.from('.hero-cta', { y: 20, opacity: 0, duration: 0.6, ease: 'power3.out' }, 1);
-
-  // Photo error
-  const img = document.getElementById('profileImg');
-  const ini = document.getElementById('profileInitials');
-  if(img) {
-    img.onerror = () => { img.style.display='none'; ini.style.display='flex'; };
-    if(!img.complete || img.naturalWidth === 0) img.onerror();
-  }
-});
-
-// ── GSAP SCROLL ANIMATIONS ────────────────
-// Section labels + text reveals
-gsap.utils.toArray('.gsap-reveal').forEach(el => {
-  gsap.from(el, {
-    y: 40, opacity: 0, duration: 0.9, ease: 'power3.out',
-    scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+  (function rf() {
+    rx += (mx - rx) * .12; ry += (my - ry) * .12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(rf);
+  })();
+  document.querySelectorAll('a,button,.proj-card,.sk-card,.bento-card,.cert-pill,input,textarea').forEach(el => {
+    el.addEventListener('mouseenter', () => { dot.style.width = '12px'; dot.style.height = '12px'; ring.style.width = '44px'; ring.style.height = '44px'; ring.style.borderColor = 'rgba(124,58,237,.9)'; });
+    el.addEventListener('mouseleave', () => { dot.style.width = '6px'; dot.style.height = '6px'; ring.style.width = '28px'; ring.style.height = '28px'; ring.style.borderColor = 'rgba(124,58,237,.6)'; });
   });
-});
-
-// GSAP Split text for section titles
-gsap.utils.toArray('.gsap-split').forEach(el => {
-  const text = el.innerHTML;
-  const words = text.split(' ').map(word => `<span class="split-word" style="display:inline-block;overflow:hidden"><span style="display:inline-block">${word}</span></span> `);
-  el.innerHTML = words.join('');
-
-  gsap.from(el.querySelectorAll('.split-word > span'), {
-    y: '100%', opacity: 0, duration: 0.7, stagger: 0.05, ease: 'power4.out',
-    scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
-  });
-});
-
-// Cards stagger
-gsap.utils.toArray('.gsap-card').forEach((card, i) => {
-  gsap.from(card, {
-    y: 50, opacity: 0, duration: 0.8,
-    delay: (i % 3) * 0.12,
-    ease: 'power3.out',
-    scrollTrigger: { trigger: card, start: 'top 88%', toggleActions: 'play none none none' }
-  });
-});
-
-// Progress bars
-gsap.utils.toArray('.skills-progress').forEach(section => {
-  ScrollTrigger.create({
-    trigger: section,
-    start: 'top 75%',
-    onEnter: () => {
-      section.querySelectorAll('.progress-fill').forEach((bar, i) => {
-        setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, i * 120 + 200);
-      });
-    }
-  });
-});
-
-// Timeline items
-gsap.utils.toArray('.timeline-item').forEach((item, i) => {
-  gsap.from(item, {
-    x: -40, opacity: 0, duration: 0.8, ease: 'power3.out',
-    scrollTrigger: { trigger: item, start: 'top 85%', toggleActions: 'play none none none' }
-  });
-});
-
-// ── CURSOR ────────────────────────────────
-const cursor = document.getElementById('cursor');
-const follower = document.getElementById('cursorFollower');
-let mx = 0, my = 0, fx = 0, fy = 0;
-
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-});
-function animF() {
-  fx += (mx-fx)*0.12; fy += (my-fy)*0.12;
-  follower.style.left = fx+'px'; follower.style.top = fy+'px';
-  requestAnimationFrame(animF);
 }
-animF();
-document.querySelectorAll('a,button,.flip-card,.skill-card,.cert-card,input,textarea').forEach(el => {
-  el.addEventListener('mouseenter', () => { cursor.style.width='14px';cursor.style.height='14px';follower.style.width='50px';follower.style.height='50px'; });
-  el.addEventListener('mouseleave', () => { cursor.style.width='8px';cursor.style.height='8px';follower.style.width='30px';follower.style.height='30px'; });
-});
 
-// ── DARK/LIGHT MODE ───────────────────────
-const themeToggle = document.getElementById('themeToggle');
+// ── THEME ──────────────────────────────────
+const themeBtn = document.getElementById('themeBtn');
 const themeIcon = document.getElementById('themeIcon');
-const htmlEl = document.documentElement;
-const saved = localStorage.getItem('theme') || 'dark';
-htmlEl.setAttribute('data-theme', saved);
-themeIcon.textContent = saved === 'dark' ? '🌙' : '☀️';
-themeToggle.addEventListener('click', () => {
-  const next = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  htmlEl.setAttribute('data-theme', next);
-  themeIcon.textContent = next === 'dark' ? '🌙' : '☀️';
-  localStorage.setItem('theme', next);
+const html = document.documentElement;
+const saved = localStorage.getItem('sg-theme') || 'dark';
+html.setAttribute('data-theme', saved);
+themeIcon.textContent = saved === 'dark' ? '◐' : '○';
+themeBtn.addEventListener('click', () => {
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  themeIcon.textContent = next === 'dark' ? '◐' : '○';
+  localStorage.setItem('sg-theme', next);
 });
 
-// ── TYPING ────────────────────────────────
-const typingEl = document.getElementById('typingText');
-const words = ['Full Stack Developer.','Oracle HCM Consultant.','Cybersecurity Enthusiast.','MERN Stack Developer.','Problem Solver.','Immediate Joiner! 🚀'];
-let wi=0,ci=0,del=false;
-function typeEffect(){
-  const w=words[wi];
-  typingEl.textContent=del?w.substring(0,ci-1):w.substring(0,ci+1);
-  del?ci--:ci++;
-  if(!del&&ci===w.length)setTimeout(()=>{del=true;},1800);
-  else if(del&&ci===0){del=false;wi=(wi+1)%words.length;}
-  setTimeout(typeEffect,del?55:95);
+// ── TYPING ─────────────────────────────────
+const typeEl = document.getElementById('typeText');
+const phrases = ['Full Stack Developer','Oracle HCM Consultant','Cybersecurity Enthusiast','Problem Solver','Immediate Joiner 🚀','MERN Stack Dev'];
+let pi = 0, ci = 0, del = false;
+function typeLoop() {
+  const p = phrases[pi];
+  typeEl.textContent = del ? p.slice(0, ci - 1) : p.slice(0, ci + 1);
+  del ? ci-- : ci++;
+  if (!del && ci === p.length) setTimeout(() => { del = true; }, 2000);
+  else if (del && ci === 0) { del = false; pi = (pi + 1) % phrases.length; }
+  setTimeout(typeLoop, del ? 50 : 90);
 }
-setTimeout(typeEffect,1500);
+setTimeout(typeLoop, 1400);
 
-// ── MAGNETIC BUTTONS ──────────────────────
-document.querySelectorAll('.magnetic').forEach(btn => {
-  btn.addEventListener('mousemove', e => {
-    const r = btn.getBoundingClientRect();
-    const x = (e.clientX-r.left-r.width/2)*0.28;
-    const y = (e.clientY-r.top-r.height/2)*0.28;
-    btn.style.transform = `translate(${x}px,${y}px)`;
-    btn.style.transition = 'transform 0.1s ease';
+// ── MAGNETIC BUTTONS ───────────────────────
+document.querySelectorAll('.mag').forEach(el => {
+  el.addEventListener('mousemove', e => {
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left - r.width / 2) * .25;
+    const y = (e.clientY - r.top - r.height / 2) * .25;
+    el.style.transform = `translate(${x}px,${y}px)`;
+    el.style.transition = 'transform .1s ease';
   });
-  btn.addEventListener('mouseleave', () => {
-    btn.style.transform = '';
-    btn.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1)';
+  el.addEventListener('mouseleave', () => {
+    el.style.transform = '';
+    el.style.transition = 'transform .5s cubic-bezier(.16,1,.3,1)';
   });
 });
 
-// ── COUNTER ───────────────────────────────
-function animCounter(el, target) {
-  let s=0; const sfx=el.dataset.suffix||'';
-  const t=setInterval(()=>{s+=target/(2000/16);if(s>=target){el.textContent=target.toLocaleString()+sfx;clearInterval(t);}else{el.textContent=Math.floor(s).toLocaleString()+sfx;}},16);
+// ── SCROLL ANIMATIONS ──────────────────────
+gsap.registerPlugin(ScrollTrigger);
+document.querySelectorAll('.reveal').forEach(el => {
+  ScrollTrigger.create({
+    trigger: el, start: 'top 87%',
+    onEnter: () => el.classList.add('vis')
+  });
+});
+
+// Skill bars on scroll
+ScrollTrigger.create({
+  trigger: '.skills-bento', start: 'top 70%',
+  onEnter: () => {
+    document.querySelectorAll('.sk-fill').forEach((b, i) => {
+      setTimeout(() => { b.style.width = b.dataset.w + '%'; }, i * 100 + 200);
+    });
+  }
+});
+
+// ── COUNTER ────────────────────────────────
+function runCounter(el, target) {
+  let n = 0; const suf = el.dataset.suf || '';
+  const t = setInterval(() => {
+    n += target / (2000 / 16);
+    if (n >= target) { el.textContent = target.toLocaleString() + suf; clearInterval(t); }
+    else el.textContent = Math.floor(n).toLocaleString() + suf;
+  }, 16);
 }
-const cntObs = new IntersectionObserver(es=>{
-  es.forEach(e=>{if(e.isIntersecting&&!e.target.dataset.counted){e.target.dataset.counted='1';animCounter(e.target,parseInt(e.target.dataset.target));}});
-},{threshold:0.6});
-document.querySelectorAll('.stat-num[data-target]').forEach(el=>cntObs.observe(el));
+const cObs = new IntersectionObserver(es => {
+  es.forEach(e => {
+    if (e.isIntersecting && !e.target.dataset.done) {
+      e.target.dataset.done = '1';
+      runCounter(e.target, parseInt(e.target.dataset.target));
+    }
+  });
+}, { threshold: .6 });
+document.querySelectorAll('.hstat-n[data-target]').forEach(el => cObs.observe(el));
 
-// ── GITHUB STATS ──────────────────────────
-async function loadGithub(){
-  const c=document.getElementById('githubStats');if(!c)return;
-  try{
-    const[ur,rr]=await Promise.all([fetch('https://api.github.com/users/Shashankteh'),fetch('https://api.github.com/users/Shashankteh/repos?per_page=100')]);
-    const u=await ur.json(),repos=await rr.json();
-    const stars=Array.isArray(repos)?repos.reduce((s,r)=>s+r.stargazers_count,0):0;
-    const forks=Array.isArray(repos)?repos.reduce((s,r)=>s+r.forks_count,0):0;
-    c.innerHTML=`<div class="github-stat"><span class="gs-num">${u.public_repos||0}</span><span class="gs-label">Repos</span></div><div class="github-stat"><span class="gs-num">${u.followers||0}</span><span class="gs-label">Followers</span></div><div class="github-stat"><span class="gs-num">${stars}</span><span class="gs-label">Stars</span></div><div class="github-stat"><span class="gs-num">${forks}</span><span class="gs-label">Forks</span></div>`;
-    // Animate stats in
-    gsap.from(c.querySelectorAll('.gs-num'),{textContent:0,duration:1.5,ease:'power2.out',snap:{textContent:1},stagger:0.1});
-  }catch(e){c.innerHTML='<div class="github-stat"><span class="gs-num">—</span><span class="gs-label">Repos</span></div><div class="github-stat"><span class="gs-num">—</span><span class="gs-label">Followers</span></div><div class="github-stat"><span class="gs-num">—</span><span class="gs-label">Stars</span></div><div class="github-stat"><span class="gs-num">—</span><span class="gs-label">Forks</span></div>';}
+// ── GITHUB ─────────────────────────────────
+async function loadGH() {
+  const c = document.getElementById('ghStats'); if (!c) return;
+  try {
+    const [ur, rr] = await Promise.all([
+      fetch('https://api.github.com/users/Shashankteh'),
+      fetch('https://api.github.com/users/Shashankteh/repos?per_page=100')
+    ]);
+    const u = await ur.json(), repos = await rr.json();
+    const stars = Array.isArray(repos) ? repos.reduce((s, r) => s + r.stargazers_count, 0) : 0;
+    const forks = Array.isArray(repos) ? repos.reduce((s, r) => s + r.forks_count, 0) : 0;
+    c.innerHTML = `
+      <div class="gh-stat"><span class="gs-n">${u.public_repos||0}</span><span class="gs-l">Repos</span></div>
+      <div class="gh-stat"><span class="gs-n">${u.followers||0}</span><span class="gs-l">Followers</span></div>
+      <div class="gh-stat"><span class="gs-n">${stars}</span><span class="gs-l">Stars</span></div>
+      <div class="gh-stat"><span class="gs-n">${forks}</span><span class="gs-l">Forks</span></div>`;
+  } catch {
+    c.innerHTML = ['Repos','Followers','Stars','Forks'].map(l => `<div class="gh-stat"><span class="gs-n">—</span><span class="gs-l">${l}</span></div>`).join('');
+  }
 }
-loadGithub();
+loadGH();
 
-// ── NAV ───────────────────────────────────
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
+// ── NAV ────────────────────────────────────
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('stuck', scrollY > 60));
 
-// Mobile menu
-const navMenu=document.getElementById('navMenu'),mobileMenu=document.getElementById('mobileMenu');
-let mOpen=false;
-navMenu.addEventListener('click',()=>{mOpen=!mOpen;mobileMenu.classList.toggle('open',mOpen);const s=navMenu.querySelectorAll('span');if(mOpen){s[0].style.transform='translateY(6.5px) rotate(45deg)';s[1].style.opacity='0';s[2].style.transform='translateY(-6.5px) rotate(-45deg)';}else{s.forEach(x=>{x.style.transform='';x.style.opacity='';}); }});
-document.querySelectorAll('.mobile-link').forEach(l=>l.addEventListener('click',()=>{mOpen=false;mobileMenu.classList.remove('open');navMenu.querySelectorAll('span').forEach(x=>{x.style.transform='';x.style.opacity='';}); }));
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const overlay = document.getElementById('mobileOverlay');
+let open = false;
+hamburger.addEventListener('click', () => {
+  open = !open;
+  overlay.classList.toggle('open', open);
+  const s = hamburger.querySelectorAll('span');
+  if (open) {
+    s[0].style.cssText = 'transform:translateY(6.5px) rotate(45deg)';
+    s[1].style.cssText = 'transform:translateY(-6.5px) rotate(-45deg)';
+  } else {
+    s.forEach(x => x.style.cssText = '');
+  }
+});
+document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', () => {
+  open = false; overlay.classList.remove('open');
+  hamburger.querySelectorAll('span').forEach(x => x.style.cssText = '');
+}));
 
 // Active nav
-const secs=document.querySelectorAll('section[id]'),nls=document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-100)cur=s.getAttribute('id');});nls.forEach(l=>{l.style.color=l.getAttribute('href')==='#'+cur?'var(--teal)':'';});});
-
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
-
-// ── FIREBASE CONTACT FORM ─────────────────
-const cf=document.getElementById('contactForm'),fs=document.getElementById('formSuccess'),fe=document.getElementById('formError'),sb=document.getElementById('submitBtn');
-cf.addEventListener('submit',async(e)=>{
-  e.preventDefault();
-  const d={name:document.getElementById('fname').value.trim(),email:document.getElementById('femail').value.trim(),subject:document.getElementById('fsubject').value.trim(),message:document.getElementById('fmessage').value.trim()};
-  sb.textContent='Sending... ⏳';sb.disabled=true;
-  try{
-    if(db)await addDoc(collection(db,'messages'),{...d,timestamp:serverTimestamp(),read:false});
-    window.location.href=`mailto:developershashank10@gmail.com?subject=${encodeURIComponent(d.subject+' — '+d.name)}&body=${encodeURIComponent('Name: '+d.name+'\nEmail: '+d.email+'\n\n'+d.message)}`;
-    cf.reset();fs.classList.add('show');setTimeout(()=>fs.classList.remove('show'),5000);
-  }catch(err){fe.classList.add('show');setTimeout(()=>fe.classList.remove('show'),4000);}
-  finally{sb.textContent='Send Message ✉';sb.disabled=false;}
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (scrollY >= s.offsetTop - 110) cur = s.id; });
+  navLinks.forEach(l => {
+    const active = l.getAttribute('href') === '#' + cur;
+    l.style.color = active ? 'var(--v2)' : '';
+  });
 });
 
-console.log('%c🚀 Shishank Goyal v4 — Epic 3D','color:#0DBAAF;font-size:16px;font-weight:bold;');
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+
+// ── CONTACT FORM ───────────────────────────
+document.getElementById('contactForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const d = {
+    name: document.getElementById('fname').value.trim(),
+    email: document.getElementById('femail').value.trim(),
+    subject: document.getElementById('fsubject').value.trim(),
+    message: document.getElementById('fmessage').value.trim()
+  };
+  const btn = document.getElementById('submitBtn');
+  const ok = document.getElementById('formOk');
+  const err = document.getElementById('formErr');
+  btn.querySelector('span').textContent = 'Sending...';
+  btn.disabled = true;
+  try {
+    if (db) await addDoc(collection(db, 'messages'), { ...d, timestamp: serverTimestamp(), read: false });
+    window.location.href = `mailto:developershashank10@gmail.com?subject=${encodeURIComponent(d.subject + ' — ' + d.name)}&body=${encodeURIComponent('Name: ' + d.name + '\nEmail: ' + d.email + '\n\n' + d.message)}`;
+    e.target.reset(); ok.classList.add('show'); setTimeout(() => ok.classList.remove('show'), 5000);
+  } catch { err.classList.add('show'); setTimeout(() => err.classList.remove('show'), 4000); }
+  finally { btn.querySelector('span').textContent = 'Send Message'; btn.disabled = false; }
+});
+
+console.log('%c✨ Shishank Goyal v5 — Aurora', 'color:#7C3AED;font-size:16px;font-weight:bold;');
+console.log('%c Made with 💜 in Jaipur', 'color:#F43F5E;font-size:12px;');
