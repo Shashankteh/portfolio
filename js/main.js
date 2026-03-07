@@ -74,10 +74,10 @@ function initThree() {
   pl2.position.set(-4, -3, 3);
   scene.add(pl2);
 
-  let mx = 0, my = 0;
+  let threeMx = 0, threeMy = 0;
   document.addEventListener('mousemove', e => {
-    mx = (e.clientX / window.innerWidth - .5) * .6;
-    my = (e.clientY / window.innerHeight - .5) * .6;
+    threeMx = (e.clientX / window.innerWidth - .5) * .6;
+    threeMy = (e.clientY / window.innerHeight - .5) * .6;
   });
 
   window.addEventListener('resize', () => {
@@ -95,8 +95,8 @@ function initThree() {
       m.rotation.y += m.userData.ry;
       m.position.y += Math.sin(t * m.userData.fy * 60 + m.userData.fo) * .0006;
     });
-    camera.position.x += (mx - camera.position.x) * .025;
-    camera.position.y += (-my - camera.position.y) * .025;
+    camera.position.x += (threeMx - camera.position.x) * .025;
+    camera.position.y += (-threeMy - camera.position.y) * .025;
     renderer.render(scene, camera);
   })();
 }
