@@ -7,317 +7,316 @@
   <meta name="description" content="Shishank Goyal — Full Stack Developer, Oracle HCM Consultant & Cybersecurity Enthusiast"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-
-  <!-- GSAP -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/SplitText.min.js"></script>
-
-  <!-- Three.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
   <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
-<!-- THREE.JS CANVAS -->
-<canvas id="threeCanvas"></canvas>
+<!-- THREE.JS BG -->
+<canvas id="bgCanvas"></canvas>
+
+<!-- AURORA BLOBS -->
+<div class="aurora">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
 
 <!-- CURSOR -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-follower" id="cursorFollower"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
 <!-- NAV -->
 <nav class="nav" id="nav">
-  <div class="nav-logo">SG<span class="dot">.</span></div>
+  <a href="#home" class="nav-brand">
+    <span class="brand-bracket">[</span>SG<span class="brand-bracket">]</span>
+  </a>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#github">GitHub</a></li>
-    <li><a href="#certificates">Certs</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about"><span class="link-num">01.</span>About</a></li>
+    <li><a href="#skills"><span class="link-num">02.</span>Skills</a></li>
+    <li><a href="#experience"><span class="link-num">03.</span>Work</a></li>
+    <li><a href="#projects"><span class="link-num">04.</span>Projects</a></li>
+    <li><a href="#contact"><span class="link-num">05.</span>Contact</a></li>
   </ul>
-  <div class="nav-right">
-    <button class="theme-toggle" id="themeToggle"><span id="themeIcon">🌙</span></button>
-    <button class="nav-menu" id="navMenu"><span></span><span></span><span></span></button>
+  <div class="nav-actions">
+    <button class="theme-btn" id="themeBtn" title="Toggle theme">
+      <span id="themeIcon">◐</span>
+    </button>
+    <a href="assets/Shishank_Goyal_Resume.pdf" class="nav-resume" download>Resume ↓</a>
+    <button class="hamburger" id="hamburger">
+      <span></span><span></span>
+    </button>
   </div>
 </nav>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
+<!-- MOBILE OVERLAY -->
+<div class="mobile-overlay" id="mobileOverlay">
   <ul>
-    <li><a href="#about" class="mobile-link">About</a></li>
-    <li><a href="#skills" class="mobile-link">Skills</a></li>
-    <li><a href="#experience" class="mobile-link">Experience</a></li>
-    <li><a href="#projects" class="mobile-link">Projects</a></li>
-    <li><a href="#github" class="mobile-link">GitHub</a></li>
-    <li><a href="#certificates" class="mobile-link">Certificates</a></li>
-    <li><a href="#contact" class="mobile-link">Contact</a></li>
+    <li><a href="#about" class="mob-link"><span>01</span>About</a></li>
+    <li><a href="#skills" class="mob-link"><span>02</span>Skills</a></li>
+    <li><a href="#experience" class="mob-link"><span>03</span>Work</a></li>
+    <li><a href="#projects" class="mob-link"><span>04</span>Projects</a></li>
+    <li><a href="#contact" class="mob-link"><span>05</span>Contact</a></li>
   </ul>
 </div>
 
-<!-- HERO -->
+<!-- ═══════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
 <section class="hero" id="home">
-  <div class="hero-content">
-    <div class="hero-tag gsap-fade">Available for work 🟢</div>
+  <div class="hero-inner">
 
-    <!-- SPLINE 3D MODEL -->
-    <div class="spline-container gsap-fade">
-      <div class="hero-photo" id="photoContainer">
-        <img src="assets/profile.png" alt="Shishank Goyal" id="profileImg"/>
-        <div class="profile-initials" id="profileInitials">SG</div>
+    <!-- LEFT -->
+    <div class="hero-left">
+      <div class="hero-badge anim-up" style="--d:0s">
+        <span class="badge-dot"></span>
+        Available for work
       </div>
-      <div class="floating-3d-ring"></div>
-      <div class="floating-3d-ring ring-2"></div>
-      <div class="floating-3d-ring ring-3"></div>
+
+      <h1 class="hero-h1 anim-up" style="--d:.1s">
+        <span class="h1-line">Shishank</span>
+        <span class="h1-line gradient-text">Goyal.</span>
+      </h1>
+
+      <div class="hero-roles anim-up" style="--d:.25s">
+        <span class="role active">Full Stack Dev</span>
+        <span class="role-sep">/</span>
+        <span class="role">Oracle HCM</span>
+        <span class="role-sep">/</span>
+        <span class="role">Cybersec</span>
+      </div>
+
+      <p class="hero-bio anim-up" style="--d:.35s">
+        BCA Graduate from Jaipur crafting <em>clean, performant</em> web apps and enterprise solutions. 1+ year real-world experience.
+      </p>
+
+      <div class="hero-btns anim-up" style="--d:.45s">
+        <a href="#projects" class="btn-primary mag">
+          <span>View Projects</span>
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contact" class="btn-outline mag">Let's Talk</a>
+      </div>
+
+      <div class="hero-stats anim-up" style="--d:.55s">
+        <div class="hstat">
+          <span class="hstat-n" data-target="1" data-suf="+">0</span>
+          <span class="hstat-l">Yr Exp</span>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <span class="hstat-n" data-target="6" data-suf="+">0</span>
+          <span class="hstat-l">Projects</span>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <span class="hstat-n" data-target="1200" data-suf="+">0</span>
+          <span class="hstat-l">Records</span>
+        </div>
+      </div>
     </div>
 
-    <h1 class="hero-name" id="heroName">
-      <span class="split-line" data-text="Shishank">Shishank</span>
-      <span class="split-line accent-line" data-text="Goyal.">Goyal<span class="accent">.</span></span>
-    </h1>
+    <!-- RIGHT — Photo Card -->
+    <div class="hero-right anim-up" style="--d:.2s">
+      <div class="photo-card">
+        <div class="photo-card-glow"></div>
+        <div class="photo-wrap">
+          <img src="assets/profile.png" id="profileImg" alt="Shishank Goyal"/>
+          <div class="photo-initials" id="photoInitials">SG</div>
+        </div>
+        <div class="photo-info">
+          <span class="photo-name">Shishank Goyal</span>
+          <span class="photo-loc">📍 Jaipur, India</span>
+        </div>
+        <div class="photo-socials">
+          <a href="https://github.com/Shashankteh" target="_blank" class="psoc">GH</a>
+          <a href="https://linkedin.com/in/shashankgoyal10" target="_blank" class="psoc">LI</a>
+          <a href="mailto:developershashank10@gmail.com" class="psoc">✉</a>
+        </div>
 
-    <p class="hero-typing gsap-fade">
-      I am a <span class="typing-text" id="typingText"></span><span class="typing-cursor">|</span>
-    </p>
-    <p class="hero-location gsap-fade">📍 Jaipur, India</p>
-
-    <div class="hero-cta gsap-fade">
-      <a href="#projects" class="btn btn-primary magnetic">View Projects</a>
-      <a href="assets/Shishank_Goyal_Resume.pdf" class="btn btn-resume magnetic" download>⬇ Resume</a>
-      <a href="#contact" class="btn btn-ghost magnetic">Hire Me</a>
+        <!-- Floating chips -->
+        <div class="chip chip-1">React ⚡</div>
+        <div class="chip chip-2">Oracle ☁️</div>
+        <div class="chip chip-3">Node.js 🔧</div>
+      </div>
     </div>
+
   </div>
 
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
+  <!-- Typing bar -->
+  <div class="hero-type-bar anim-up" style="--d:.65s">
+    <span class="type-label">Currently:</span>
+    <span class="type-text" id="typeText"></span>
+    <span class="type-cur">▊</span>
+  </div>
+
+  <div class="scroll-cue">
+    <div class="scroll-dot"></div>
+    <span>scroll</span>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="about section" id="about">
+<!-- ═══════════════════════════════════════
+     ABOUT
+════════════════════════════════════════ -->
+<section class="section" id="about">
   <div class="container">
-    <div class="section-label gsap-reveal">01 / About</div>
+    <div class="sec-tag">01 — About</div>
     <div class="about-grid">
-      <div class="about-left">
-        <h2 class="section-title gsap-split">Crafting digital<br/><em>experiences</em> that matter.</h2>
+      <div class="about-text-col">
+        <h2 class="sec-h2 reveal">I build things <em>for the web</em> and beyond.</h2>
+        <p class="body-text reveal">I'm a BCA 2025 graduate with hands-on experience in full-stack development, Oracle Fusion HCM, and IoT/cybersecurity projects. I love solving complex problems with elegant code.</p>
+        <p class="body-text reveal">Whether it's a React frontend, a Node.js API, or configuring HCM data loaders for 1200+ employees — I bring full ownership to every project.</p>
+        <div class="about-links reveal">
+          <a href="mailto:developershashank10@gmail.com" class="alink">developershashank10@gmail.com ↗</a>
+          <a href="tel:+918432474451" class="alink">+91 84324 74451 ↗</a>
+        </div>
       </div>
-      <div class="about-right">
-        <p class="about-text gsap-reveal">I'm a BCA graduate with <strong>1+ year of hands-on experience</strong> in full-stack development and enterprise Oracle HCM consulting. I build clean, performant web apps and have managed 1,200+ employee records.</p>
-        <p class="about-text gsap-reveal">When I'm not coding, I explore cybersecurity, build IoT projects, and contribute to open-source. I believe good code is like good design — invisible, effortless, beautiful.</p>
-        <div class="about-stats gsap-reveal">
-          <div class="stat"><span class="stat-num" data-target="1" data-suffix="+">0</span><span class="stat-label">Years Exp</span></div>
-          <div class="stat"><span class="stat-num" data-target="6" data-suffix="+">0</span><span class="stat-label">Projects</span></div>
-          <div class="stat"><span class="stat-num" data-target="1200" data-suffix="+">0</span><span class="stat-label">Records</span></div>
+      <div class="about-bento">
+        <div class="bento-card bc-loc reveal">
+          <span class="bc-emoji">📍</span>
+          <span class="bc-title">Jaipur, India</span>
+          <span class="bc-sub">Available Immediately</span>
+        </div>
+        <div class="bento-card bc-exp reveal">
+          <span class="bc-big">1+</span>
+          <span class="bc-label">Years Experience</span>
+        </div>
+        <div class="bento-card bc-stack reveal">
+          <span class="bc-emoji">⚡</span>
+          <span class="bc-title">MERN Stack</span>
+          <span class="bc-sub">Primary Stack</span>
+        </div>
+        <div class="bento-card bc-open reveal">
+          <span class="open-dot"></span>
+          <span class="bc-title">Open to Work</span>
+          <span class="bc-sub">Full-time / Internship</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SKILLS -->
-<section class="skills section" id="skills">
+<!-- ═══════════════════════════════════════
+     SKILLS
+════════════════════════════════════════ -->
+<section class="section section-alt" id="skills">
   <div class="container">
-    <div class="section-label gsap-reveal">02 / Skills</div>
-    <h2 class="section-title gsap-split">What I <em>work with.</em></h2>
-    <div class="skills-grid">
-      <div class="skill-card gsap-card"><div class="skill-icon">⚡</div><h3>Frontend</h3><div class="skill-tags"><span>React.js</span><span>JavaScript</span><span>HTML5</span><span>CSS3</span></div></div>
-      <div class="skill-card gsap-card"><div class="skill-icon">🔧</div><h3>Backend</h3><div class="skill-tags"><span>Node.js</span><span>Express.js</span><span>Python</span><span>Java</span></div></div>
-      <div class="skill-card gsap-card"><div class="skill-icon">🗄️</div><h3>Database</h3><div class="skill-tags"><span>MongoDB</span><span>MySQL</span><span>SQL</span><span>Oracle Cloud</span></div></div>
-      <div class="skill-card gsap-card"><div class="skill-icon">☁️</div><h3>Oracle HCM</h3><div class="skill-tags"><span>Fusion HCM</span><span>HCM Loader</span><span>BIP Reports</span><span>Fast Formulas</span></div></div>
-      <div class="skill-card gsap-card"><div class="skill-icon">🔐</div><h3>Cybersecurity</h3><div class="skill-tags"><span>Network Analysis</span><span>IoT Security</span><span>ESP32</span><span>RFID</span></div></div>
-      <div class="skill-card gsap-card"><div class="skill-icon">🛠️</div><h3>Tools</h3><div class="skill-tags"><span>Git/GitHub</span><span>Linux</span><span>Blender 3D</span><span>Firebase</span></div></div>
-    </div>
+    <div class="sec-tag">02 — Skills</div>
+    <h2 class="sec-h2 reveal">My <em>tech arsenal.</em></h2>
 
-    <!-- PROGRESS BARS -->
-    <div class="skills-progress gsap-reveal">
-      <h3 class="progress-title">Proficiency</h3>
-      <div class="progress-item"><div class="progress-label"><span>MERN Stack</span><span>85%</span></div><div class="progress-bar"><div class="progress-fill" data-width="85"></div></div></div>
-      <div class="progress-item"><div class="progress-label"><span>Oracle HCM</span><span>80%</span></div><div class="progress-bar"><div class="progress-fill" data-width="80"></div></div></div>
-      <div class="progress-item"><div class="progress-label"><span>Python</span><span>75%</span></div><div class="progress-bar"><div class="progress-fill" data-width="75"></div></div></div>
-      <div class="progress-item"><div class="progress-label"><span>Java</span><span>70%</span></div><div class="progress-bar"><div class="progress-fill" data-width="70"></div></div></div>
-      <div class="progress-item"><div class="progress-label"><span>SQL / Databases</span><span>78%</span></div><div class="progress-bar"><div class="progress-fill" data-width="78"></div></div></div>
-      <div class="progress-item"><div class="progress-label"><span>Cybersecurity</span><span>65%</span></div><div class="progress-bar"><div class="progress-fill" data-width="65"></div></div></div>
+    <div class="skills-bento">
+      <div class="sk-card sk-large reveal">
+        <div class="sk-header">
+          <span class="sk-icon">⚡</span>
+          <h3>Frontend</h3>
+        </div>
+        <div class="sk-pills">
+          <span>React.js</span><span>JavaScript</span><span>HTML5</span><span>CSS3</span><span>TypeScript</span>
+        </div>
+        <div class="sk-bar-wrap">
+          <div class="sk-bar-row"><span>React.js</span><div class="sk-bar"><div class="sk-fill" data-w="85"></div></div><span>85%</span></div>
+          <div class="sk-bar-row"><span>JavaScript</span><div class="sk-bar"><div class="sk-fill" data-w="88"></div></div><span>88%</span></div>
+          <div class="sk-bar-row"><span>HTML/CSS</span><div class="sk-bar"><div class="sk-fill" data-w="92"></div></div><span>92%</span></div>
+        </div>
+      </div>
+
+      <div class="sk-card reveal">
+        <div class="sk-header"><span class="sk-icon">🔧</span><h3>Backend</h3></div>
+        <div class="sk-pills"><span>Node.js</span><span>Express</span><span>Python</span><span>Java</span></div>
+        <div class="sk-bar-wrap">
+          <div class="sk-bar-row"><span>Node.js</span><div class="sk-bar"><div class="sk-fill" data-w="80"></div></div><span>80%</span></div>
+          <div class="sk-bar-row"><span>Python</span><div class="sk-bar"><div class="sk-fill" data-w="75"></div></div><span>75%</span></div>
+        </div>
+      </div>
+
+      <div class="sk-card reveal">
+        <div class="sk-header"><span class="sk-icon">☁️</span><h3>Oracle HCM</h3></div>
+        <div class="sk-pills"><span>Fusion HCM</span><span>HCM Loader</span><span>BIP Reports</span><span>Fast Formulas</span></div>
+        <div class="sk-bar-wrap">
+          <div class="sk-bar-row"><span>Oracle HCM</span><div class="sk-bar"><div class="sk-fill" data-w="80"></div></div><span>80%</span></div>
+          <div class="sk-bar-row"><span>SQL/BIP</span><div class="sk-bar"><div class="sk-fill" data-w="78"></div></div><span>78%</span></div>
+        </div>
+      </div>
+
+      <div class="sk-card reveal">
+        <div class="sk-header"><span class="sk-icon">🗄️</span><h3>Database</h3></div>
+        <div class="sk-pills"><span>MongoDB</span><span>MySQL</span><span>Firebase</span><span>Oracle DB</span></div>
+        <div class="sk-bar-wrap">
+          <div class="sk-bar-row"><span>MongoDB</span><div class="sk-bar"><div class="sk-fill" data-w="82"></div></div><span>82%</span></div>
+          <div class="sk-bar-row"><span>MySQL</span><div class="sk-bar"><div class="sk-fill" data-w="78"></div></div><span>78%</span></div>
+        </div>
+      </div>
+
+      <div class="sk-card reveal">
+        <div class="sk-header"><span class="sk-icon">🔐</span><h3>Cybersecurity</h3></div>
+        <div class="sk-pills"><span>Network Analysis</span><span>IoT Security</span><span>ESP32</span><span>RFID</span></div>
+        <div class="sk-bar-wrap">
+          <div class="sk-bar-row"><span>Networking</span><div class="sk-bar"><div class="sk-fill" data-w="65"></div></div><span>65%</span></div>
+        </div>
+      </div>
+
+      <div class="sk-card reveal">
+        <div class="sk-header"><span class="sk-icon">🛠️</span><h3>Tools</h3></div>
+        <div class="sk-pills"><span>Git/GitHub</span><span>Linux</span><span>Blender 3D</span><span>Adobe</span><span>Firebase</span></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- EXPERIENCE -->
-<section class="experience section" id="experience">
+<!-- ═══════════════════════════════════════
+     EXPERIENCE
+════════════════════════════════════════ -->
+<section class="section" id="experience">
   <div class="container">
-    <div class="section-label gsap-reveal">03 / Experience</div>
-    <h2 class="section-title gsap-split">Where I've <em>worked.</em></h2>
-    <div class="timeline">
-      <div class="timeline-item gsap-reveal">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">May 2025 — Dec 2025</div>
-        <div class="timeline-content">
-          <h3>Technical Operations & Web Support Intern</h3>
-          <span class="timeline-company">The Atharva Events, Jaipur</span>
-          <ul>
-            <li>Managed and updated official event website including registrations & live content</li>
-            <li>Technical support for online forms, user issues, and backend data records</li>
-            <li>Supported digital tools for ticketing, promotions, and audience engagement</li>
+    <div class="sec-tag">03 — Work Experience</div>
+    <h2 class="sec-h2 reveal">Where I've <em>made impact.</em></h2>
+    <div class="exp-list">
+
+      <div class="exp-item reveal">
+        <div class="exp-left">
+          <div class="exp-logo">AE</div>
+          <div class="exp-line"></div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-meta">
+            <span class="exp-period">May 2025 — Dec 2025</span>
+            <span class="exp-badge">Internship</span>
+          </div>
+          <h3 class="exp-role">Technical Operations & Web Support Intern</h3>
+          <span class="exp-company">The Atharva Events, Jaipur</span>
+          <ul class="exp-list-points">
+            <li>Managed and updated official event website — registrations & live content</li>
+            <li>Technical support for forms, user issues, and backend data records</li>
+            <li>Digital tools for ticketing, promotions, and audience engagement</li>
             <li>Social media campaigns and analytics tracking</li>
           </ul>
+          <div class="exp-tags"><span>Web Dev</span><span>Technical Support</span><span>Analytics</span></div>
         </div>
       </div>
-      <div class="timeline-item gsap-reveal">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">Oct 2024 — Apr 2025</div>
-        <div class="timeline-content">
-          <h3>Technical Consultant Intern — Oracle Fusion HCM</h3>
-          <span class="timeline-company">ORACREST Consulting Pvt. Ltd., Jaipur</span>
-          <ul>
+
+      <div class="exp-item reveal">
+        <div class="exp-left">
+          <div class="exp-logo">OC</div>
+          <div class="exp-line"></div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-meta">
+            <span class="exp-period">Oct 2024 — Apr 2025</span>
+            <span class="exp-badge exp-badge-accent">Oracle</span>
+          </div>
+          <h3 class="exp-role">Technical Consultant Intern — Oracle Fusion HCM</h3>
+          <span class="exp-company">ORACREST Consulting Pvt. Ltd., Jaipur</span>
+          <ul class="exp-list-points">
             <li>Oracle Cloud HCM implementation and functional-technical support</li>
             <li>Managed workforce uploads for <strong>1,200+ employees</strong> via HCM Data Loader</li>
-            <li>Developed BIP reports using SQL and RTF templates</li>
-            <li>Validated Oracle Fast Formulas and designed compensation plans</li>
+            <li>Developed BIP reports using SQL queries and RTF templates</li>
+            <li>Validated Fast Formulas, designed compensation plans, supported UAT</li>
           </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS — 3D FLIP CARDS -->
-<section class="projects section" id="projects">
-  <div class="container">
-    <div class="section-label gsap-reveal">04 / Projects</div>
-    <h2 class="section-title gsap-split">Things I've <em>built.</em></h2>
-    <p class="flip-hint gsap-reveal">✦ Hover cards to flip</p>
-    <div class="projects-grid">
-
-      <div class="flip-card gsap-card featured-flip">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <span class="project-num">01</span>
-            <div class="flip-icon">🌐</div>
-            <h3>Portfolio Website</h3>
-            <p>Personal portfolio with 3D animations, Firebase backend, dark/light mode & GitHub stats.</p>
-            <div class="project-tech"><span>HTML5</span><span>Firebase</span><span>Three.js</span><span>GSAP</span></div>
-          </div>
-          <div class="flip-back">
-            <h3>Portfolio Website</h3>
-            <ul>
-              <li>Three.js 3D background</li>
-              <li>GSAP text animations</li>
-              <li>Firebase contact form</li>
-              <li>Dark/Light mode</li>
-              <li>GitHub live stats</li>
-            </ul>
-            <a href="https://shashankteh.github.io/portfolio/" target="_blank" class="flip-link">View Live ↗</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card gsap-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <span class="project-num">02</span>
-            <div class="flip-icon">🔐</div>
-            <h3>Network Anomaly Detection</h3>
-            <p>Python tool for real-time network traffic analysis and automated port scanning.</p>
-            <div class="project-tech"><span>Python</span><span>Networking</span><span>Cybersecurity</span></div>
-          </div>
-          <div class="flip-back">
-            <h3>Network Anomaly Detection</h3>
-            <ul>
-              <li>Real-time traffic monitoring</li>
-              <li>Anomaly detection algorithm</li>
-              <li>Automated port scanner</li>
-              <li>Threat reporting system</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card gsap-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <span class="project-num">03</span>
-            <div class="flip-icon">🏠</div>
-            <h3>Smart Room with RFID</h3>
-            <p>IoT smart room with RFID access control, automated lighting & security logs.</p>
-            <div class="project-tech"><span>Arduino</span><span>IoT</span><span>RFID</span><span>C++</span></div>
-          </div>
-          <div class="flip-back">
-            <h3>Smart Room RFID</h3>
-            <ul>
-              <li>RFID-based access control</li>
-              <li>Automated lighting system</li>
-              <li>Central security event log</li>
-              <li>Arduino microcontroller</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card gsap-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <span class="project-num">04</span>
-            <div class="flip-icon">📡</div>
-            <h3>ESP32 Marauder</h3>
-            <p>ESP32 wireless security auditing device for penetration testing in IoT environments.</p>
-            <div class="project-tech"><span>ESP32</span><span>IoT Security</span><span>Wi-Fi</span></div>
-          </div>
-          <div class="flip-back">
-            <h3>ESP32 Marauder</h3>
-            <ul>
-              <li>Wi-Fi network scanning</li>
-              <li>Penetration testing tool</li>
-              <li>IoT vulnerability probing</li>
-              <li>Custom firmware setup</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card gsap-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <span class="project-num">05</span>
-            <div class="flip-icon">🛒</div>
-            <h3>E-Commerce Website</h3>
-            <p>Responsive front-end platform with product listings, cart UI & mobile-first design.</p>
-            <div class="project-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
-          </div>
-          <div class="flip-back">
-            <h3>E-Commerce Website</h3>
-            <ul>
-              <li>Product listing grid</li>
-              <li>Shopping cart UI</li>
-              <li>Mobile-first design</li>
-              <li>Responsive layout</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card gsap-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <span class="project-num">06</span>
-            <div class="flip-icon">♻️</div>
-            <h3>Recycling Awareness</h3>
-            <p>Sustainability website promoting recycling with educational content & centre locators.</p>
-            <div class="project-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
-          </div>
-          <div class="flip-back">
-            <h3>Recycling Awareness</h3>
-            <ul>
-              <li>Educational content</li>
-              <li>Local centre locator</li>
-              <li>Clean UI design</li>
-              <li>Awareness campaigns</li>
-            </ul>
-          </div>
+          <div class="exp-tags"><span>Oracle HCM</span><span>SQL</span><span>BIP Reports</span><span>HCM Loader</span></div>
         </div>
       </div>
 
@@ -325,72 +324,186 @@
   </div>
 </section>
 
-<!-- GITHUB STATS -->
-<section class="github-section section" id="github">
+<!-- ═══════════════════════════════════════
+     PROJECTS
+════════════════════════════════════════ -->
+<section class="section section-alt" id="projects">
   <div class="container">
-    <div class="section-label gsap-reveal">05 / GitHub</div>
-    <h2 class="section-title gsap-split">Open Source <em>Activity.</em></h2>
-    <div class="github-card gsap-reveal">
-      <div class="github-header">
-        <div class="github-avatar"><img src="https://github.com/Shashankteh.png" alt="GitHub" onerror="this.src='assets/profile.png'"/></div>
-        <div class="github-info"><h3>Shashankteh</h3><span>github.com/Shashankteh</span></div>
-        <a href="https://github.com/Shashankteh" target="_blank" class="btn btn-ghost magnetic">View Profile ↗</a>
+    <div class="sec-tag">04 — Projects</div>
+    <h2 class="sec-h2 reveal">Things I've <em>shipped.</em></h2>
+    <div class="proj-grid">
+
+      <div class="proj-card proj-featured reveal">
+        <div class="proj-img-area">
+          <div class="proj-mockup">
+            <div class="mock-bar"><span></span><span></span><span></span></div>
+            <div class="mock-body">
+              <div class="mock-line w80"></div><div class="mock-line w60"></div>
+              <div class="mock-line w90"></div><div class="mock-line w40"></div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-meta">
+            <span class="proj-num">01</span>
+            <span class="proj-badge">Featured</span>
+          </div>
+          <h3>Portfolio Website</h3>
+          <p>Personal portfolio with Three.js 3D background, GSAP animations, Firebase backend, dark/light mode & GitHub live stats.</p>
+          <div class="proj-stack"><span>HTML5</span><span>GSAP</span><span>Three.js</span><span>Firebase</span></div>
+          <a href="https://shashankteh.github.io/portfolio/" target="_blank" class="proj-link">
+            View Live <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
       </div>
-      <div class="github-stats-grid" id="githubStats">
-        <div class="github-stat-skeleton"></div><div class="github-stat-skeleton"></div>
-        <div class="github-stat-skeleton"></div><div class="github-stat-skeleton"></div>
+
+      <div class="proj-card reveal">
+        <div class="proj-icon-area"><span class="picon">🔐</span></div>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="proj-num">02</span></div>
+          <h3>Network Anomaly Detection</h3>
+          <p>Python-based cybersecurity tool for real-time traffic analysis, anomaly detection, and automated port scanning.</p>
+          <div class="proj-stack"><span>Python</span><span>Networking</span><span>Security</span></div>
+        </div>
       </div>
-      <div class="github-img-wrap">
-        <img src="https://ghchart.rshah.org/0D9EA4/Shashankteh" alt="GitHub Chart" class="github-chart"/>
+
+      <div class="proj-card reveal">
+        <div class="proj-icon-area"><span class="picon">🏠</span></div>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="proj-num">03</span></div>
+          <h3>Smart Room with RFID</h3>
+          <p>IoT smart room with RFID access control, automated lighting, and centralized security event log.</p>
+          <div class="proj-stack"><span>Arduino</span><span>IoT</span><span>RFID</span><span>C++</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-icon-area"><span class="picon">📡</span></div>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="proj-num">04</span></div>
+          <h3>ESP32 Marauder</h3>
+          <p>Wireless security auditing device for penetration testing and Wi-Fi scanning in IoT environments.</p>
+          <div class="proj-stack"><span>ESP32</span><span>IoT</span><span>Wi-Fi</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-icon-area"><span class="picon">🛒</span></div>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="proj-num">05</span></div>
+          <h3>E-Commerce Website</h3>
+          <p>Responsive front-end e-commerce platform with product listings, cart UI, and mobile-first design.</p>
+          <div class="proj-stack"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-icon-area"><span class="picon">♻️</span></div>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="proj-num">06</span></div>
+          <h3>Recycling Awareness</h3>
+          <p>Sustainability website with educational content and local recycling centre locators.</p>
+          <div class="proj-stack"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CERTIFICATES
+════════════════════════════════════════ -->
+<section class="section" id="certificates">
+  <div class="container">
+    <div class="sec-tag">05 — Certificates</div>
+    <h2 class="sec-h2 reveal">What I've <em>earned.</em></h2>
+    <div class="cert-row">
+      <div class="cert-pill reveal"><span>🎓</span>HTML & CSS — Great Learning</div>
+      <div class="cert-pill reveal"><span>🐍</span>Python — Great Learning</div>
+      <div class="cert-pill reveal"><span>☕</span>Java — Great Learning</div>
+      <div class="cert-pill reveal"><span>🌐</span>WordPress — Coursera</div>
+      <div class="cert-pill reveal"><span>📷</span>Photography — Canon</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     GITHUB
+════════════════════════════════════════ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="sec-tag">06 — GitHub</div>
+    <h2 class="sec-h2 reveal">Open Source <em>Activity.</em></h2>
+    <div class="gh-card reveal">
+      <div class="gh-top">
+        <img src="https://github.com/Shashankteh.png" class="gh-avatar" alt="GitHub"/>
+        <div class="gh-info">
+          <h3>Shashankteh</h3>
+          <span>github.com/Shashankteh</span>
+        </div>
+        <a href="https://github.com/Shashankteh" target="_blank" class="btn-outline mag">View →</a>
+      </div>
+      <div class="gh-stats" id="ghStats">
+        <div class="gh-stat-sk"></div><div class="gh-stat-sk"></div>
+        <div class="gh-stat-sk"></div><div class="gh-stat-sk"></div>
+      </div>
+      <div class="gh-chart-wrap">
+        <img src="https://ghchart.rshah.org/7C3AED/Shashankteh" alt="GitHub chart" class="gh-chart"/>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CERTIFICATES -->
-<section class="certificates section" id="certificates">
+<!-- ═══════════════════════════════════════
+     CONTACT
+════════════════════════════════════════ -->
+<section class="section" id="contact">
   <div class="container">
-    <div class="section-label gsap-reveal">06 / Certificates</div>
-    <h2 class="section-title gsap-split">What I've <em>earned.</em></h2>
-    <div class="cert-grid">
-      <div class="cert-card gsap-card"><div class="cert-icon">🎓</div><div class="cert-info"><h3>HTML & CSS</h3><span class="cert-issuer">Great Learning</span><span class="cert-badge">Verified ✓</span></div></div>
-      <div class="cert-card gsap-card"><div class="cert-icon">🐍</div><div class="cert-info"><h3>Python Programming</h3><span class="cert-issuer">Great Learning</span><span class="cert-badge">Verified ✓</span></div></div>
-      <div class="cert-card gsap-card"><div class="cert-icon">☕</div><div class="cert-info"><h3>Java Programming</h3><span class="cert-issuer">Great Learning</span><span class="cert-badge">Verified ✓</span></div></div>
-      <div class="cert-card gsap-card"><div class="cert-icon">🌐</div><div class="cert-info"><h3>WordPress Development</h3><span class="cert-issuer">Coursera</span><span class="cert-badge">Verified ✓</span></div></div>
-      <div class="cert-card gsap-card"><div class="cert-icon">📷</div><div class="cert-info"><h3>Photography</h3><span class="cert-issuer">Canon Certification</span><span class="cert-badge">Verified ✓</span></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact section" id="contact">
-  <div class="container">
-    <div class="section-label gsap-reveal">07 / Contact</div>
-    <div class="contact-grid">
+    <div class="sec-tag">07 — Contact</div>
+    <div class="contact-wrap">
       <div class="contact-left">
-        <h2 class="section-title gsap-split">Let's work <em>together.</em></h2>
-        <p class="contact-sub gsap-reveal">Open to opportunities. Job offer, project, or just hi — always open.</p>
-        <div class="contact-links gsap-reveal">
-          <a href="mailto:developershashank10@gmail.com" class="contact-btn">✉ developershashank10@gmail.com</a>
-          <a href="tel:+918432474451" class="contact-btn">📞 +91 84324 74451</a>
+        <h2 class="sec-h2 reveal">Let's build<br/><em>something epic.</em></h2>
+        <p class="body-text reveal">Open to full-time roles, freelance projects, and interesting collaborations. Drop me a message!</p>
+        <div class="contact-info reveal">
+          <a href="mailto:developershashank10@gmail.com" class="cinfo-row">
+            <span class="cinfo-icon">✉</span>
+            developershashank10@gmail.com
+          </a>
+          <a href="tel:+918432474451" class="cinfo-row">
+            <span class="cinfo-icon">📞</span>
+            +91 84324 74451
+          </a>
         </div>
-        <div class="social-links gsap-reveal">
-          <a href="https://github.com/Shashankteh" target="_blank" class="social-link">GitHub</a>
-          <span class="divider">/</span>
-          <a href="https://linkedin.com/in/shashankgoyal10" target="_blank" class="social-link">LinkedIn</a>
-          <span class="divider">/</span>
-          <a href="https://shashankteh.github.io/portfolio/" target="_blank" class="social-link">Portfolio</a>
+        <div class="contact-socials reveal">
+          <a href="https://github.com/Shashankteh" target="_blank" class="csoc">GitHub ↗</a>
+          <a href="https://linkedin.com/in/shashankgoyal10" target="_blank" class="csoc">LinkedIn ↗</a>
         </div>
       </div>
-      <div class="contact-right gsap-reveal">
-        <form class="contact-form" id="contactForm">
-          <div class="form-group"><label>Your Name</label><input type="text" id="fname" placeholder="John Doe" required/></div>
-          <div class="form-group"><label>Email Address</label><input type="email" id="femail" placeholder="john@example.com" required/></div>
-          <div class="form-group"><label>Subject</label><input type="text" id="fsubject" placeholder="Job Opportunity / Project" required/></div>
-          <div class="form-group"><label>Message</label><textarea id="fmessage" rows="5" placeholder="Tell me about your project..." required></textarea></div>
-          <button type="submit" class="btn btn-primary btn-full magnetic" id="submitBtn">Send Message ✉</button>
-          <div class="form-success" id="formSuccess">✅ Message sent! I'll get back to you soon.</div>
-          <div class="form-error" id="formError">❌ Something went wrong. Please try again.</div>
+      <div class="contact-right reveal">
+        <form class="cform" id="contactForm">
+          <div class="cfield">
+            <label>Name</label>
+            <input type="text" id="fname" placeholder="John Doe" required/>
+          </div>
+          <div class="cfield">
+            <label>Email</label>
+            <input type="email" id="femail" placeholder="john@example.com" required/>
+          </div>
+          <div class="cfield">
+            <label>Subject</label>
+            <input type="text" id="fsubject" placeholder="Job / Project / Collab" required/>
+          </div>
+          <div class="cfield">
+            <label>Message</label>
+            <textarea id="fmessage" rows="5" placeholder="Tell me more..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary full mag" id="submitBtn">
+            <span>Send Message</span>
+            <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+          <div class="form-ok" id="formOk">✅ Sent! I'll reply soon.</div>
+          <div class="form-err" id="formErr">❌ Something went wrong.</div>
         </form>
       </div>
     </div>
@@ -400,15 +513,18 @@
 <!-- FOOTER -->
 <footer class="footer">
   <div class="container">
-    <p>Designed & Built by <strong>Shishank Goyal</strong> · 2025</p>
-    <p class="footer-sub">Jaipur, India 🇮🇳</p>
+    <div class="footer-inner">
+      <span class="footer-brand"><span class="brand-bracket">[</span>SG<span class="brand-bracket">]</span></span>
+      <span class="footer-copy">Designed & Built by Shishank Goyal · 2025</span>
+      <span class="footer-loc">Jaipur 🇮🇳</span>
+    </div>
   </div>
 </footer>
 
 <script type="module" src="js/main.js"></script>
 <script>
 window.addEventListener('load',function(){
-  var img=document.getElementById('profileImg'),ini=document.getElementById('profileInitials');
+  var img=document.getElementById('profileImg'),ini=document.getElementById('photoInitials');
   if(img){img.onerror=function(){this.style.display='none';ini.style.display='flex';};if(!img.complete||img.naturalWidth===0)img.onerror();}
 });
 </script>
