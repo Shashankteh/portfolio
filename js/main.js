@@ -18,6 +18,9 @@ let db = null;
 try { const app = initializeApp(firebaseConfig); db = getFirestore(app); } catch(e) {}
 
 // ── THREE.JS FLOATING PARTICLES ────────────
+// mouseMx/mouseMy — renamed to avoid duplicate `mx` conflict with cursor section
+let mouseMx = 0, mouseMy = 0;
+
 function initThree() {
   const canvas = document.getElementById('bgCanvas');
   if (!canvas) return;
@@ -29,7 +32,6 @@ function initThree() {
   const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.z = 6;
 
-  // Floating shapes — violet/rose/amber palette
   const colors = [0x7C3AED, 0xF43F5E, 0xF59E0B, 0xa855f7, 0xe11d48];
   const meshes = [];
 
@@ -74,10 +76,9 @@ function initThree() {
   pl2.position.set(-4, -3, 3);
   scene.add(pl2);
 
-  let mx = 0, my = 0;
   document.addEventListener('mousemove', e => {
-    mx = (e.clientX / window.innerWidth - .5) * .6;
-    my = (e.clientY / window.innerHeight - .5) * .6;
+    mouseMx = (e.clientX / window.innerWidth - .5) * .6;
+    mouseMy = (e.clientY / window.innerHeight - .5) * .6;
   });
 
   window.addEventListener('resize', () => {
@@ -95,8 +96,8 @@ function initThree() {
       m.rotation.y += m.userData.ry;
       m.position.y += Math.sin(t * m.userData.fy * 60 + m.userData.fo) * .0006;
     });
-    camera.position.x += (mx - camera.position.x) * .025;
-    camera.position.y += (-my - camera.position.y) * .025;
+    camera.position.x += (mouseMx - camera.position.x) * .025;
+    camera.position.y += (-mouseMy - camera.position.y) * .025;
     renderer.render(scene, camera);
   })();
 }
@@ -138,7 +139,7 @@ themeBtn.addEventListener('click', () => {
 
 // ── TYPING ─────────────────────────────────
 const typeEl = document.getElementById('typeText');
-const phrases = ['Full Stack Developer','Oracle HCM Consultant','Cybersecurity Enthusiast','Problem Solver','Immediate Joiner 🚀','MERN Stack Dev'];
+const phrases = ['Full Stack Developer','Oracle HCM Consultant','Cybersecurity Enthusiast','Problem Solver','Immediate Joiner 🚀','Chrome Extension Dev'];
 let pi = 0, ci = 0, del = false;
 function typeLoop() {
   const p = phrases[pi];
@@ -174,7 +175,6 @@ document.querySelectorAll('.reveal').forEach(el => {
   });
 });
 
-// Skill bars on scroll
 ScrollTrigger.create({
   trigger: '.skills-bento', start: 'top 70%',
   onEnter: () => {
@@ -229,7 +229,6 @@ loadGH();
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('stuck', scrollY > 60));
 
-// Hamburger
 const hamburger = document.getElementById('hamburger');
 const overlay = document.getElementById('mobileOverlay');
 let open = false;
@@ -249,7 +248,6 @@ document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', 
   hamburger.querySelectorAll('span').forEach(x => x.style.cssText = '');
 }));
 
-// Active nav
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll', () => {
@@ -261,7 +259,6 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const t = document.querySelector(a.getAttribute('href'));
